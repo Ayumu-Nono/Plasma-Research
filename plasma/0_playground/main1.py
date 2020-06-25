@@ -10,39 +10,59 @@ class Calc:
     def __init__(self):
         self.q = 1  # 電荷
         self.magnetic_field = np.array([0, 0, 1])  # 磁場の大きさ
+        self.electric_field = np.array([0, 1, 0])
         self.initial_velocity = np.array([0, 1, 0])
         self.initial_position = np.array([0, 0, 0])
-        self.delta_t = 0.001  # 刻み幅
+        self.delta_t = 0.01  # 刻み幅
         self.mass = 1 # mass
+
+    def righthand_function(
+        self, velocity: np.array,
+        magnetic_field: np.array,
+        electric_field: np.array
+        ) -> np.array:
+        v = velocity
+        B = magnetic_field
+        E = electric_field
+        return self.q * (np.cross(v, B)  + E)/ self.mass
+        
 
     def calc_position(self, v: np.array, x: np.array) -> np.array:
         x = x + v * self.delta_t
         return x
 
-    def calc_delta_v(self, v: np.array, B:np.array) -> np.array:
-        result = self.q * np.cross(v, B) / self.mass 
-        return result
+    def calc_new_v(self, velocity: np.array, magnetic_field: np.array, electric_field: np.array) -> np.array:
+        v = velocity
+        B = magnetic_field
+        E = electric_field
+        h = self.delta_t
+        k1 = self.righthand_function(v, B, E)
+        k2 = self.righthand_function(v + (h / 2) * k1, B, E)
+        k3 = self.righthand_function(v + (h / 2) * k2, B, E)
+        k4 = self.righthand_function(v + h * k3, B, E)
+        new_v = v + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
+        return new_v
 
     def test(self):
-        delta_v = self.calc_delta_v(self.initial_velocity, self.magnetic_field)
-        v = self.initial_velocity + delta_v * self.delta_t
-        x = self.calc_position(v, self.initial_position)
+        new_v = self.calc_new_v(self.initial_velocity, self.magnetic_field, self.electric_field)
+        new_x = self.calc_position(new_v, self.initial_position)
         f = open('data.dat', "w")
         for i in range(3):
-            f.write(str(x[i]) + ' ')
+            f.write(str(new_x[i]) + ' ')
         f.write("\n")
         f.close()
-        print(x)
-        for step in range(10):
-            delta_v = self.calc_delta_v(v, self.magnetic_field)
-            v = v + delta_v * self.delta_t
-            x = self.calc_position(v, x)
+        print(new_x)
+        for step in range(5000):
+            v = new_v
+            x = new_x
+            new_v = self.calc_new_v(v, self.magnetic_field, self.electric_field)
+            new_x = self.calc_position(v, x)
             f = open('data.dat', "a")
             for i in range(3):
-                f.write(str(x[i]) + ' ')
+                f.write(str(new_x[i]) + ' ')
             f.write("\n")
             f.close()    
-            print(x)
+            print(new_x)
 
         
     def draw(self, x: np.array, y: np.array) -> None:
