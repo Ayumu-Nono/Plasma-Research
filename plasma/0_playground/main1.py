@@ -13,7 +13,7 @@ class Calc:
         self.electric_field = np.array([0, 0, 0])
         self.initial_velocity = np.array([0, 1, 0])
         self.initial_position = np.array([0, 0, 0])
-        self.delta_t = 0.01  # 刻み幅
+        self.delta_t = 0.001  # 刻み幅
         self.mass = 1 # mass
 
     def righthand_function(
@@ -46,20 +46,29 @@ class Calc:
     def test(self):
         new_v = self.calc_new_v(self.initial_velocity, self.magnetic_field, self.electric_field)
         new_x = self.calc_position(new_v, self.initial_position)
-        f = open('data.dat', "w")
+        time = self.delta_t
+        f = open('data.csv', "w")
+        f.write('time,position_x,position_y,position_z,velocity_x,velocity_y,velocity_z,\n')
+        f.write(str(time) + ',')
         for i in range(3):
-            f.write(str(new_x[i]) + ' ')
+            f.write(str(new_x[i]) + ',')
+        for i in range(3):
+            f.write(str(new_v[i]) + ',')
         f.write("\n")
         f.close()
         print(new_x)
         for step in range(5000):
+            time = time + self.delta_t
             v = new_v
             x = new_x
             new_v = self.calc_new_v(v, self.magnetic_field, self.electric_field)
             new_x = self.calc_position(v, x)
-            f = open('data.dat', "a")
+            f = open('data.csv', "a")
+            f.write(str(time) + ',')
             for i in range(3):
-                f.write(str(new_x[i]) + ' ')
+                f.write(str(new_x[i]) + ',')
+            for i in range(3):
+                f.write(str(new_v[i]) + ',')
             f.write("\n")
             f.close()    
             print(new_x)
