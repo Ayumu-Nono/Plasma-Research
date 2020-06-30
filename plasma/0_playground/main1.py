@@ -9,11 +9,11 @@ class Calc:
     """
     def __init__(self):
         self.q = 1  # 電荷
-        self.magnetic_field = np.array([0, 0, 1])  # 磁場の大きさ
-        self.electric_field = np.array([0, 0, 0])
-        self.initial_velocity = np.array([0, 1, 0])
+        self.magnetic_field = np.array([0, 1, 0])  # 磁場の大きさ
+        self.electric_field = np.array([0, 2, 0])
+        self.initial_velocity = np.array([1, 0, 0])
         self.initial_position = np.array([0, 0, 0])
-        self.delta_t = 0.001  # 刻み幅
+        self.delta_t = 0.01  # 刻み幅
         self.mass = 1 # mass
 
     def righthand_function(
