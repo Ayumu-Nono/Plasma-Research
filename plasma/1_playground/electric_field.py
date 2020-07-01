@@ -27,7 +27,8 @@ class ElectricFieldModel:
         field_x = potential[x + 1][y][z] - potential[x][y][z] 
         field_y = potential[x][y + 1][z] - potential[x][y][z]
         field_z = potential[x][y][z + 1] - potential[x][y][z]
-        return np.array([field_x, field_y, field_z])
+        # WARNING: Never forget to append "-"
+        return - np.array([field_x, field_y, field_z])
 
     def calc_cube_volume(
         self,
@@ -74,7 +75,7 @@ class ElectricFieldModel:
 
     
 def main():
-    field = FieldModel('outdata.csv')
+    field = ElectricFieldModel('outdata.csv')
     field.set_electric_potential(10)
     field.calc_electric_field_on_free_point(np.array([3.2, 4.5, 5.1]))
     field.calc_cube_volume(np.array([1,1,1]), np.array([0.3,0.3,0.3]))
