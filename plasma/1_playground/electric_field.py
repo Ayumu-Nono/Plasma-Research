@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-class FieldModel:
+class ElectricFieldModel:
     def __init__(
         self,
         outfile
@@ -29,14 +29,19 @@ class FieldModel:
         field_z = potential[x][y][z + 1] - potential[x][y][z]
         return np.array([field_x, field_y, field_z])
 
+    def calc_cube_volume(
+        self,
+        point1: np.array,
+        point2: np.array
+    ) -> float:
+        dv = np.abs(point2 - point1)
+        volume = dv[0] * dv[1] * dv[2]
+        return volume
+
     def calc_electric_field_on_free_point(
         self,
         position: np.array
     ) -> np.array:
-        x = position[0]
-        y = position[1]
-        z = position[2]
-        position = np.array([x, y, z])
         position_floor = np.floor(position).astype(np.int64)
         position_ceil = np.ceil(position).astype(np.int64)
         grid_x0_y0_z0 = position_floor
@@ -64,16 +69,8 @@ class FieldModel:
             + self.calc_electric_field_on_grid(grid_x0_y1_z1) * volume_x1_y0_z0 \
             + self.calc_electric_field_on_grid(grid_x1_y1_z1) * volume_x0_y0_z0 
         print(electric_field)
+        return electric_field
 
-
-    def calc_cube_volume(
-        self,
-        point1: np.array,
-        point2: np.array
-    ) -> float:
-        dv = np.abs(point2 - point1)
-        volume = dv[0] * dv[1] * dv[2]
-        return volume
 
     
 def main():
