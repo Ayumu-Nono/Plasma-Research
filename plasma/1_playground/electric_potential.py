@@ -4,10 +4,10 @@ import math
 
 class ElectricPotentialModel:
     def __init__:
-        self.Boltzmann_constant = 1.380649E-23
-        self.electron_temparature = 1.16E4  # 適当
+        self.Boltzmann_constant = 1.380649E-23  # [J K^-1]
+        self.electron_temparature = 1.16E4  # [K] 数値は適当
 
-    def calc_electric_potential_without_magnetic_field(
+    def calc_electric_potential_with_no_collision(
         self,
         ion_density: float
     ) -> float:
