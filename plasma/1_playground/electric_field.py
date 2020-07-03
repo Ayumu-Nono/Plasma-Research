@@ -11,7 +11,7 @@ class ElectricFieldModel:
         self,
         cell_num: int 
     ) -> None:
-        potential = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num)
+        potential = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num) * 10
         self.electric_potential = potential
 
     def calc_electric_field_on_grid(
