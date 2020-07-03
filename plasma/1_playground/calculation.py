@@ -1,16 +1,16 @@
 # プラズマを粒子的に解く
 import numpy as np
 import matplotlib.pyplot as plt
+from electric_field import ElectricFieldModel
 
-
-class Calc:
+class Calc(ElectricFieldModel):
     """
     動きを計算
     """
     def __init__(self):
+        self.electric_field_model = ElectricFieldModel()
         self.q = 1  # 電荷
         self.magnetic_field = np.array([0, 1, 0])  # 磁場の大きさ
-        self.electric_field = np.array([0, 2, 0])
         self.initial_velocity = np.array([1, 0, 0])
         self.initial_position = np.array([0, 0, 0])
         self.delta_t = 0.01  # 刻み幅
@@ -44,7 +44,9 @@ class Calc:
         return new_v
 
     def test(self):
-        new_v = self.calc_new_v(self.initial_velocity, self.magnetic_field, self.electric_field)
+        self.electric_field_model.set_electric_potential(100)
+        electric_field = self.electric_field_model.calc_electric_field_on_free_point(self.initial_position)
+        new_v = self.calc_new_v(self.initial_velocity, self.magnetic_field, electric_field)
         new_x = self.calc_position(new_v, self.initial_position)
         time = self.delta_t
         f = open('data.csv', "w")
@@ -61,7 +63,8 @@ class Calc:
             time = time + self.delta_t
             v = new_v
             x = new_x
-            new_v = self.calc_new_v(v, self.magnetic_field, self.electric_field)
+            electric_field = self.electric_field_model.calc_electric_field_on_free_point(self.initial_position)
+            new_v = self.calc_new_v(v, self.magnetic_field, electric_field)
             new_x = self.calc_position(v, x)
             f = open('data.csv', "a")
             f.write(str(time) + ',')

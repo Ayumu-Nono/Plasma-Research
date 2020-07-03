@@ -4,17 +4,15 @@ import math
 class ElectricFieldModel:
     def __init__(
         self,
-        outfile
     ):
-        self.outfile = outfile
+        pass
 
     def set_electric_potential(
         self,
         cell_num: int 
     ) -> None:
-        potential = np.random.rand(1000).reshape(cell_num, cell_num, cell_num)
+        potential = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num)
         self.electric_potential = potential
-        print(self.electric_potential)
 
     def calc_electric_field_on_grid(
         self,
@@ -75,10 +73,9 @@ class ElectricFieldModel:
 
     
 def main():
-    field = ElectricFieldModel('outdata.csv')
+    field = ElectricFieldModel()
     field.set_electric_potential(10)
     field.calc_electric_field_on_free_point(np.array([3.2, 4.5, 5.1]))
-    field.calc_cube_volume(np.array([1,1,1]), np.array([0.3,0.3,0.3]))
 
 
 if __name__ == "__main__":
