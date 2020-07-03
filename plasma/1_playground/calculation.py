@@ -46,6 +46,7 @@ class Calc(ElectricFieldModel):
     def test(self):
         self.electric_field_model.set_electric_potential(100)
         electric_field = self.electric_field_model.calc_electric_field_on_free_point(self.initial_position)
+        # print(electric_field)
         new_v = self.calc_new_v(self.initial_velocity, self.magnetic_field, electric_field)
         new_x = self.calc_position(new_v, self.initial_position)
         time = self.delta_t
@@ -58,12 +59,12 @@ class Calc(ElectricFieldModel):
             f.write(str(new_v[i]) + ',')
         f.write("\n")
         f.close()
-        print(new_x)
+        # print(new_x)
         for step in range(5000):
             time = time + self.delta_t
             v = new_v
             x = new_x
-            electric_field = self.electric_field_model.calc_electric_field_on_free_point(self.initial_position)
+            electric_field = self.electric_field_model.calc_electric_field_on_free_point(x)
             new_v = self.calc_new_v(v, self.magnetic_field, electric_field)
             new_x = self.calc_position(v, x)
             f = open('data.csv', "a")
@@ -74,7 +75,7 @@ class Calc(ElectricFieldModel):
                 f.write(str(new_v[i]) + ',')
             f.write("\n")
             f.close()    
-            print(new_x)
+            # print(new_x)
 
         
     def draw(self, x: np.array, y: np.array) -> None:

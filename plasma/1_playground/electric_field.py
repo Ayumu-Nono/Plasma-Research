@@ -67,7 +67,6 @@ class ElectricFieldModel:
             + self.calc_electric_field_on_grid(grid_x1_y0_z1) * volume_x0_y1_z0 \
             + self.calc_electric_field_on_grid(grid_x0_y1_z1) * volume_x1_y0_z0 \
             + self.calc_electric_field_on_grid(grid_x1_y1_z1) * volume_x0_y0_z0 
-        print(electric_field)
         return electric_field
 
 
