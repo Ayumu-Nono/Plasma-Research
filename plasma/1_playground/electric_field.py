@@ -12,7 +12,7 @@ class ElectricFieldModel:
         self,
         cell_num: int 
     ) -> None:
-        potential = np.arange(1000).reshape(cell_num, cell_num, cell_num)
+        potential = np.random.rand(1000).reshape(cell_num, cell_num, cell_num)
         self.electric_potential = potential
         print(self.electric_potential)
 
