@@ -2,6 +2,9 @@ import numpy as np
 import math
 
 class ElectricFieldModel:
+
+    """"電場を定義"""
+    
     def __init__(
         self,
     ):
