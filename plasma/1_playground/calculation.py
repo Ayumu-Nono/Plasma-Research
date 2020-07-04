@@ -46,7 +46,6 @@ class Calc(ElectricFieldModel):
     def test(self):
         self.electric_field_model.set_electric_potential(100)
         electric_field = self.electric_field_model.calc_electric_field_on_free_point(self.initial_position)
-        # print(electric_field)
         new_v = self.calc_new_v(self.initial_velocity, self.magnetic_field, electric_field)
         new_x = self.calc_position(new_v, self.initial_position)
         time = self.delta_t
