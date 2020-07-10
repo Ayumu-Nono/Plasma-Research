@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from model.particle_model import ParticleModel
+from model.particle import ParticleModel
 
 
 class InitializeNeutralPatricles:
@@ -16,18 +16,20 @@ class InitializeNeutralPatricles:
         for pk in range(self.particles_num):
             init_position = np.array([1, 1, 1])
             init_velocity = np.array([2, 2, 2])
-            self.particle_list.append(ParticleModel(
+            particle = ParticleModel(
                 pk=pk,
                 init_position=init_position,
                 init_velocity=init_velocity
-            ))
+            )
+            particle.as_neutral()
+            self.particle_list.append(particle)
 
     def test(self):
         self.make_particles()
         print((self.particle_list))
 
 def main():
-    init = InitializeNeutralPatricles(particles_num=10)
+    init = InitializeNeutralPatricles(particles_num=3)
     init.test()
 
 
