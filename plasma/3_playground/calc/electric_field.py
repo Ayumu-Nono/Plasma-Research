@@ -1,7 +1,9 @@
 import numpy as np
 import math
 
-class ElectricFieldModel:
+from pic_module import PICModule
+
+class ElectricFieldModel(PICModule):
 
     """"電場を定義"""
     
@@ -30,15 +32,6 @@ class ElectricFieldModel:
         field_z = potential[x][y][z + 1] - potential[x][y][z]
         # WARNING: Never forget to append "-"
         return - np.array([field_x, field_y, field_z])
-
-    def calc_cube_volume(
-        self,
-        point1: np.array,
-        point2: np.array
-    ) -> float:
-        dv = np.abs(point2 - point1)
-        volume = dv[0] * dv[1] * dv[2]
-        return volume
 
     def calc_electric_field_on_free_point(
         self,
