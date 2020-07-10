@@ -4,7 +4,7 @@ import pandas as pd
 from model.particle import ParticleModel
 
 
-class InitializeNeutralPatricles:
+class NeutralPatricles:
 
     """中性粒子を初期配置"""
     # TODO 初期ポジションと初期速度をちゃんと分布で定義
@@ -33,7 +33,7 @@ class InitializeNeutralPatricles:
         print((self.particle_list))
 
 
-class InitializeIonizedPatricles:
+class IonizedPatricles:
 
     """イオン粒子を初期配置"""
     # TODO 初期ポジションと初期速度をちゃんと分布で定義
