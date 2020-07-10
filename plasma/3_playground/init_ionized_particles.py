@@ -5,9 +5,9 @@ from model.particle import ParticleModel
 
 
 
-class InitializeNeutralPatricles:
+class InitializeIonizedPatricles:
 
-    """中性粒子を初期配置"""
+    """イオン粒子を初期配置"""
     # TODO 初期ポジションと初期速度をちゃんと分布で定義
 
     def __init__(
@@ -26,7 +26,7 @@ class InitializeNeutralPatricles:
                 init_position=init_position,
                 init_velocity=init_velocity
             )
-            particle.as_neutral()
+            particle.as_ion()
             self.particle_list.append(particle)
 
     def test(self):
@@ -34,7 +34,7 @@ class InitializeNeutralPatricles:
         print((self.particle_list))
 
 def main():
-    init = InitializeNeutralPatricles(particles_num=3)
+    init = InitializeIonizedPatricles(particles_num=3)
     init.test()
 
 
