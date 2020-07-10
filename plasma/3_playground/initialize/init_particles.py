@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from model.particle import ParticleModel
-
+from .model.particle import ParticleModel
 
 class NeutralPatricles:
 

@@ -13,7 +13,7 @@ class CalcArea:
         boundary_layer = 0  # やっぱこれいらないから０にしとく
         latice_num = int(era_scale / latice_scale) + boundary_layer * 2 
         self.latice = np.zeros((latice_num, latice_num, latice_num))
-        print(len(self.latice))
+        print((self.latice))
 
     def set_engine(
         self,
@@ -61,9 +61,6 @@ class CalcArea:
     def test(self):
         self.make_latice(10,1)
         self.set_engine(radius=5.1, length=2)
-        self.is_inner_engine(np.array([1, 3, 4]))
-        self.is_out_of_area(np.array([100,1,1]))
-
 
 def main():
     init = CalcArea()
