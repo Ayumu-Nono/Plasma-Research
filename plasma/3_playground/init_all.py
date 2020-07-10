@@ -21,9 +21,15 @@ class InitAll:
         self.area.make_latice(era_scale=era_scale, latice_scale=latice_scale)
         self.area.set_engine(radius=engine_radius, length=engine_length)
 
+    def make_particles(self) -> None:
+        self.neutral.make_particles()
+        self.ion.make_particles()
+        print(self.ion.particle_list)
+
 def main():
     init = InitAll(10)
     init.make_calc_area(10, 1, 3, 2)
+    init.make_particles()
 
 
 if __name__ == "__main__":
