@@ -12,7 +12,7 @@ class InitializeNeutralPatricleModel:
     def 
 
 def main():
-    init = InitializeNeutralPatricleModel(1000)
+    init = InitializeNeutralPatricleModel(num=100)
 
 
 if __name__ == "__main__":
