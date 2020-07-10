@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class InitialCondition:
+class CalcArea:
 
     """境界条件・計算領域内判定"""
     
@@ -33,11 +33,11 @@ class InitialCondition:
         is_inner_engine = (norm < self.engine_radius) and (position_x < self.engine_length)
         return is_inner_engine
     
-    def is_outer_erea(
+    def is_outer_area(
         self,
         position: np.array
     ) -> bool:
-        is_outer_erea = (
+        is_outer_area = (
             position[0] > 0
             and position[1] > 0
             and position[2] > 0
@@ -45,28 +45,28 @@ class InitialCondition:
             and position[1] < len(self.latice)
             and position[2] < len(self.latice)
         )
-        is_outer_erea = not is_outer_erea
-        return is_outer_erea
+        is_outer_area = not is_outer_area
+        return is_outer_area
         
-    def is_calc_erea(
+    def is_calc_area(
         self,
         position: np.array
     ) -> bool:
-        is_calc_erea = (
+        is_calc_area = (
             not self.is_inner_engine
-            and not self.is_outer_erea 
+            and not self.is_outer_area 
         )
-        return is_calc_erea
+        return is_calc_area
 
     def test(self):
         self.make_latice(10,1)
         self.set_engine(radius=5.1, length=2)
         self.is_inner_engine(np.array([1, 3, 4]))
-        self.is_outer_erea(np.array([100,1,1]))
+        self.is_outer_area(np.array([100,1,1]))
 
 
 def main():
-    init = InitialCondition()
+    init = CalcArea()
     init.test()
 
 
