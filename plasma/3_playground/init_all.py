@@ -24,13 +24,16 @@ class InitAll:
     def make_particles(self) -> None:
         self.neutral.make_particles()
         self.ion.make_particles()
-        print(self.ion.particle_list)
 
 def main():
-    init = InitAll(10)
+    init = InitAll(1000)
     init.make_calc_area(10, 1, 3, 2)
     init.make_particles()
-
+    print(init.ion.particle_list)
+    from save import Save
+    save = Save('position.csv')
+    for pk in range(len(init.ion.particle_list)):
+        save.add_row(init.ion.particle_list[pk].position)
 
 if __name__ == "__main__":
     main()

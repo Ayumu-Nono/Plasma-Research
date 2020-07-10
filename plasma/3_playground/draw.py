@@ -24,7 +24,7 @@ class Draw:
         plt.savefig('figure.png')
 
 def main():
-    d = Draw('data.csv')
+    d = Draw('position.csv')
     d.draw()
 
 
