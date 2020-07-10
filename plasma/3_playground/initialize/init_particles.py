@@ -28,10 +28,6 @@ class NeutralPatricles:
             particle.as_neutral()
             self.particle_list.append(particle)
 
-    def test(self):
-        self.make_particles()
-        print((self.particle_list))
-
 
 class IonizedPatricles:
 
