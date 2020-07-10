@@ -2,6 +2,9 @@ import numpy as np
 
 
 class InitialCondition:
+
+    """境界条件・計算領域内判定"""
+    
     def make_latice(
         self,
         era_scale: int,
