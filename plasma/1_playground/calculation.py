@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 from electric_field import ElectricFieldModel
 
 class Calc(ElectricFieldModel):
-    """
-    動きを計算
-    """
+    
+    """動きを計算"""
+    
     def __init__(self):
         self.electric_field_model = ElectricFieldModel()
         self.q = 1  # 電荷
