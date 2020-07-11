@@ -14,6 +14,7 @@ class DensityModel(PICModule):
         self,
         position: np.array,
     ) -> np.array
+        pass
         
 
 def main():
