@@ -11,6 +11,10 @@ class DensityModel(PICModule):
 
 def main():
     d = DensityModel()
+    f = open('density_sample.csv', "w")
+    cell_num = 100
+    density_sample_array = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num) * 10
+    
     d.calc_density_array(np.array([1, 2.2, 3.4]))
 
 
