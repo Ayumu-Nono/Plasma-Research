@@ -39,7 +39,7 @@ class PICModule:
         ])
         return grid_array
 
-    def calc_volume_ratio_array(
+    def calc_volume_array(
         self,
         position: np.array
     ) -> np.array:
@@ -76,11 +76,12 @@ class PICModule:
         if not np.sum(volume_array) == 1:
             print('Volume sum not equal 1')
             raise KeyboardInterrupt
+        # 逆順にすることを忘れずに
+        volume_array = volume_array[::-1]
         return volume_array
 
-    # def calc_hoge_ratio_using_volume_ratio(
+    # def inverse_volume_ratio_array(
     #     self,
-    #     hoge_array: np.array,
     #     volume_ratio_array: np.array
     # ) -> np.array:
     #     if len(volume_ratio_array) == 8 and len(hoge_array) == 8:
@@ -92,7 +93,7 @@ class PICModule:
 
 def main():
     p = PICModule()
-    p.calc_volume_ratio_array(np.array([1,2,3.3]))
+    print(p.calc_volume_array(np.array([1,2,3.3])))
     
 
 

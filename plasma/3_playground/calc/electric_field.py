@@ -37,12 +37,12 @@ class ElectricFieldModel(PICModule):
         self,
         position: np.array
     ) -> np.array:
-        volume_ratio_array = self.calc_volume_ratio_array(position)
+        volume_ratio_array = self.calc_volume_array(position)
         surrounding_grid_array = self.calc_surrounding_grid(position)
         electric_field = 0
         for grid_num in range(8):
             electric_field += self.calc_electric_field_on_grid(surrounding_grid_array[grid_num]) \
-                * volume_ratio_array[- (grid_num + 1)]  # volumeをかける時、その組み合わせに注意
+                * volume_ratio_array[grid_num)]
         return electric_field
 
 
