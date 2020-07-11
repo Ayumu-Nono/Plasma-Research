@@ -1,5 +1,6 @@
 import numpy as np
 
+from ...quantity.initial_quantity import PhysicalQuantity
 
 class ParticleModel:
     def __init__(
@@ -8,18 +9,19 @@ class ParticleModel:
         init_position: np.array,
         init_velocity: np.array,
     ) -> None:
+        self.physical_quantity = PhysicalQuantity()
         self.position = init_position
         self.velocity = init_velocity
 
     def as_neutral(self) -> None:
         self.type: str = "neutral"
         self.charge: float = 0
-        self.mass: float = 131 / 6.022E23
+        self.mass: float = self.physical_quantity.xenon_mass
 
     def as_ion(self) -> None:
         self.type:str = "ion"
-        self.charge: float = 1.602E-19
-        self.mass: float = 131 / 6.022E23
+        self.charge: float = self.physical_quantity.elementary_charge
+        self.mass: float = self.physical_quantity.xenon_mass
 
     def change_status(
         self,
