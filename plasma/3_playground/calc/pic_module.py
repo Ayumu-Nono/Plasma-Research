@@ -80,16 +80,6 @@ class PICModule:
         volume_array = volume_array[::-1]
         return volume_array
 
-    # def inverse_volume_ratio_array(
-    #     self,
-    #     volume_ratio_array: np.array
-    # ) -> np.array:
-    #     if len(volume_ratio_array) == 8 and len(hoge_array) == 8:
-    #         print('ERROR: Not match length of array')
-    #     inverse_volume_ratio_array = volume_ratio_array[::-1]
-    #     return hoge_array * inverse_volume_ratio_array
-            
-
 
 def main():
     p = PICModule()
