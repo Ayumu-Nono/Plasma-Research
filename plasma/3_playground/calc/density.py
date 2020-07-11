@@ -5,9 +5,16 @@ from pic_module import PICModule
 class DensityModel(PICModule):
 
     """格子点における粒子密度を計算"""
-    # TODO 粒子ひとつあたりに、現実世界の粒子何個分に相当させるか考える
+    # TODO 粒子ひとつあたりに、現実世界の粒子何個分に相当させるか考える->変数self.particle_magnification
 
-    pass
+    def __init__(self):
+        self.particle_magnification = 100
+
+    def calc_density_array(
+        self,
+        position: np.array,
+    ) -> np.array
+        
 
 def main():
     d = DensityModel()
