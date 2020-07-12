@@ -79,7 +79,7 @@ class Iterate:
         
 
 def main():
-    i = Iterate(particles_num=100)
+    i = Iterate(particles_num=10000)
     i.iterate()
 
 
