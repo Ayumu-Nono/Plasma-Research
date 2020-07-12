@@ -64,14 +64,15 @@ class Iterate:
                 grid_z = grid[2]
                 self.latice[grid_x, grid_y, grid_z] += volume
         
-    def test(self):
-        self.update_particles_model()
-        self.push_info_to_grid()
-        pass
+    def iterate(self):
+        for timestep in range(100):
+            self.update_particles_model()
+            self.push_info_to_grid()
+        
 
 def main():
-    i = Iterate(particles_num=100)
-    i.test()
+    i = Iterate(particles_num=1000)
+    i.iterate()
 
 
 if __name__ == "__main__":
