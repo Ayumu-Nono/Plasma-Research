@@ -10,7 +10,7 @@ class CalcArea:
         era_scale: int,
         latice_scale: int,
     ) -> None:
-        boundary_layer = 0  # やっぱこれいらないから０にしとく
+        boundary_layer = 2
         latice_num = int(era_scale / latice_scale) + boundary_layer * 2 
         self.latice = np.zeros((latice_num, latice_num, latice_num))
 
