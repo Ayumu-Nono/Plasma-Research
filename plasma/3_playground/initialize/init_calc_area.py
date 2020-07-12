@@ -47,7 +47,7 @@ class CalcArea:
         is_out_of_area = not is_out_of_area
         return is_out_of_area
         
-    def is_calc_area(
+    def is_in_calc_area(
         self,
         position: np.array
     ) -> bool:
