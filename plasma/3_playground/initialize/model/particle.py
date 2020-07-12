@@ -1,6 +1,7 @@
 import numpy as np
 
-from ...quantity.initial_quantity import PhysicalQuantity
+from .initial_quantity import PhysicalQuantity
+
 
 class ParticleModel:
     def __init__(
