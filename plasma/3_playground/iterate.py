@@ -19,6 +19,7 @@ class Iterate:
         self.init.make_calc_area(10, 1, 1, 2)
         self.init.make_particles()
         self.calc_density = DensityModel()
+        self.latice = self.init.area.latice
         for particle in self.init.ion.particle_list:
             density_array = self.calc_density.calc_density_array(particle.position)
             for grid_num in range(8):
@@ -27,8 +28,7 @@ class Iterate:
                 grid_x = grid[0]
                 grid_y = grid[1]
                 grid_z = grid[2]
-                self.init.area.latice[grid_x, grid_y, grid_z] += volume
-        self.latice = self.init.area.latice
+                self.latice[grid_x, grid_y, grid_z] += volume
 
     def update_particles_model(self):
         print('Updating field ...')
@@ -53,6 +53,16 @@ class Iterate:
 
     def push_info_to_grid(self):
         print('Pushing to grid ...')
+        self.latice = self.latice = self.init.area.latice
+        for particle in self.init.ion.particle_list:
+            density_array = self.calc_density.calc_density_array(particle.position)
+            for grid_num in range(8):
+                grid = density_array[grid_num][0]
+                volume = density_array[grid_num][1]
+                grid_x = grid[0]
+                grid_y = grid[1]
+                grid_z = grid[2]
+                self.latice[grid_x, grid_y, grid_z] += volume
         
     def test(self):
         self.update_particles_model()
