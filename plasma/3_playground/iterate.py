@@ -3,6 +3,7 @@ import pandas as pd
 
 from init_all import InitAll
 from calc.density import DensityModel
+from calc.electric_potential import ElectricPotentialModel
 
 class Iterate:
     def __init__(
@@ -11,6 +12,7 @@ class Iterate:
         particles_num: int,
     ):
         print('initializing all in Class "Iterate" ...')
+        self.potential_model = ElectricPotentialModel()
         self.init = InitAll(particles_num)
         self.initial_position_csv = initial_position_csv
         self.init.make_calc_area(10, 1, 3, 2)
@@ -25,9 +27,8 @@ class Iterate:
                 grid_y = grid[1]
                 grid_z = grid[2]
                 self.init.area.latice[grid_x, grid_y, grid_z] += volume
-        print(type(self.init.area.latice))
-
-    def 
+        self.latice = self.init.area.latice
+        print(self.potential_model.calc_electric_potential_with_no_collision(self.init.area.latice))
 
 
     # def read_initial_position(self):
