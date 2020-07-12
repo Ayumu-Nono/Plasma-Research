@@ -21,7 +21,7 @@ class Draw:
         ax.plot(X, Y, Z, marker='o', linestyle='None')
 
         # plt.show()
-        plt.savefig('figure.png')
+        plt.savefig('result/figure.png')
 
 def main():
     d = Draw('position.csv')

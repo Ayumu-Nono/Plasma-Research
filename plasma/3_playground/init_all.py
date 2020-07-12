@@ -30,10 +30,14 @@ def main():
     init.make_calc_area(10, 1, 3, 2)
     init.make_particles()
     print(init.ion.particle_list)
-    from save import Save
-    save = Save('position.csv')
-    for pk in range(len(init.ion.particle_list)):
-        save.add_row(init.ion.particle_list[pk].position)
+    # from result.save import Save
+    # save = Save('result/position.csv')
+    # for pk in range(len(init.ion.particle_list)):
+    #     save.add_row(init.ion.particle_list[pk].position)
+    from result.draw import Draw
+    draw = Draw('result/position.csv')
+    draw.draw()
+    
 
 if __name__ == "__main__":
     main()
