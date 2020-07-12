@@ -12,11 +12,11 @@ class ElectricPotentialModel:
         
     def calc_electric_potential_with_no_collision(
         self,
-        ion_density: float
-    ) -> float:
+        ion_density: np.array,
+    ) -> np.array:
         k = self.physical_quantity.Boltzmann_constant
         T = self.physical_quantity.electron_temparature
-        potential = k * T * math.log(ion_density)
+        potential = - k * T * math.log(ion_density)
         return potential
 
 def main():

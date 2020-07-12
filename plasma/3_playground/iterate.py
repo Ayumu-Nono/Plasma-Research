@@ -25,10 +25,11 @@ class Iterate:
                 grid_y = grid[1]
                 grid_z = grid[2]
                 self.init.area.latice[grid_x, grid_y, grid_z] += volume
-        print(self.init.area.latice)
+        print(type(self.init.area.latice))
+
+    def 
 
 
-    
     # def read_initial_position(self):
     #     df = pd.read_csv(self.initial_position_csv)
     #     self.df = df[['position_x', 'position_y', 'position_z']]
