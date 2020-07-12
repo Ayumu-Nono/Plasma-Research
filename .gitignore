@@ -1,3 +1,4 @@
 .vscode/
 MTG/
 __pycache__/
+.DS_Store
