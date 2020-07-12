@@ -5,6 +5,7 @@ from init_all import InitAll
 from calc.density import DensityModel
 from calc.electric_potential import ElectricPotentialModel
 from calc.electric_field import ElectricFieldModel
+from calc.motion import CalcMotion
 
 class Iterate:
     def __init__(
@@ -12,6 +13,7 @@ class Iterate:
         initial_position_csv: str,
         particles_num: int,
     ):
+        self.motion = CalcMotion()
         print('initializing all in Class "Iterate" ...')
         self.potential_model = ElectricPotentialModel()
         self.init = InitAll(particles_num)
@@ -31,13 +33,18 @@ class Iterate:
         self.latice = self.init.area.latice
         # print(self.potential_model.calc_electric_potential_with_no_collision(self.init.area.latice))
 
-    def update_field(self):
+    def update_particles_model(self):
         E_field_model = ElectricFieldModel(potential=self.latice)
         for particle in self.init.ion.particle_list:
-            pass
-        E_field = E_field_model.calc_electric_field_on_free_point(np.array([1,2,3]))
-        print(E_field)
-
+            E_field = E_field_model.calc_electric_field_on_free_point(position=particle.position)
+            B_field = np.array([0, 0, 0])
+            new_position = self.motion.calc_new_position(
+                particle=particle,
+                magnetic_field=B_field,
+                electric_field=E_field
+            )
+            print(new_position)
+        
     # def read_initial_position(self):
     #     df = pd.read_csv(self.initial_position_csv)
     #     self.df = df[['position_x', 'position_y', 'position_z']]
@@ -46,7 +53,7 @@ class Iterate:
     # def 
 
     def test(self):
-        self.update_field()
+        self.update_particles_model()
         pass
 
 def main():

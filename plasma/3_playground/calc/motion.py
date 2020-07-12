@@ -1,23 +1,26 @@
 # プラズマを粒子的に解く
 import numpy as np
 import matplotlib.pyplot as plt
-from electric_field import ElectricFieldModel
 
-class Calc(ElectricFieldModel):
+from .electric_field import ElectricFieldModel
+
+
+class CalcMotion:
     
     """動きを計算"""
     
     def __init__(self):
-        self.electric_field_model = ElectricFieldModel()
-        self.q = 1  # 電荷
-        self.magnetic_field = np.array([0, 1, 0])  # 磁場の大きさ
-        self.initial_velocity = np.array([1, 0, 0])
-        self.initial_position = np.array([0, 0, 0])
+        # self.electric_field_model = ElectricFieldModel()
+        # self.initial_velocity = np.array([1, 0, 0])
+        # self.initial_position = np.array([0, 0, 0])
+        # self.magnetic_field = np.array([0, 1, 0])  # 磁場の大きさ
         self.delta_t = 0.01  # 刻み幅
+        self.q = 1  # 電荷
         self.mass = 1 # mass
 
     def righthand_function(
-        self, velocity: np.array,
+        self, 
+        velocity: np.array,
         magnetic_field: np.array,
         electric_field: np.array
         ) -> np.array:
@@ -25,11 +28,6 @@ class Calc(ElectricFieldModel):
         B = magnetic_field
         E = electric_field
         return self.q * (np.cross(v, B)  + E)/ self.mass
-        
-
-    def calc_position(self, v: np.array, x: np.array) -> np.array:
-        x = x + v * self.delta_t
-        return x
 
     def calc_new_v(self, velocity: np.array, magnetic_field: np.array, electric_field: np.array) -> np.array:
         v = velocity
@@ -42,6 +40,21 @@ class Calc(ElectricFieldModel):
         k4 = self.righthand_function(v + h * k3, B, E)
         new_v = v + (h / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
         return new_v
+
+    def calc_new_position(
+        self,
+        particle,  # objectで渡す
+        magnetic_field: np.array,
+        electric_field: np.array
+    ) -> np.array:
+        new_v = self.calc_new_v(
+            velocity=particle.velocity,
+            magnetic_field=magnetic_field,
+            electric_field=electric_field
+        )
+        old_x = particle.position
+        new_x = old_x + new_v * self.delta_t
+        return new_x
 
     def test(self):
         self.electric_field_model.set_electric_potential(100)
