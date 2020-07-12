@@ -10,7 +10,10 @@ def f(x):
 
 if __name__ == '__main__':
     start = time.time()
-    with Pool(6) as p:
-        print(p.map(f, [1, 2, 3, 4, 5, 6]))
+    pool_num = 10
+    with Pool(pool_num) as p:
+        print(p.map(f, [1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6,
+        1, 2, 3, 4, 5, 6]))
     elapsed_time = time.time() - start
+    print('pool number ', pool_num)
     print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
