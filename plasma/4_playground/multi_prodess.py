@@ -1,15 +1,16 @@
-import time
 from multiprocessing import Pool
+from tqdm import tqdm
+import time
 
-# 並列処理させる関数
-def nijou(x):
-    print('input: %d' % x)
-    time.sleep(2)
-    retValue = x * x
-    print('double: %d' % (retValue))
-    return(retValue)
 
-if __name__ == "__main__":
-    p = Pool(4) # プロセス数を4に設定
-    result = p.map(nijou, range(10))  # nijou()に0,1,..,9を与えて並列演算
-    print(result)
+def f(x):
+    for x in tqdm(range(100000000)):
+        x = x* x
+    return x*x
+
+if __name__ == '__main__':
+    start = time.time()
+    with Pool(5) as p:
+        print(p.map(f, [1, 2, 3]))
+    elapsed_time = time.time() - start
+    print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
