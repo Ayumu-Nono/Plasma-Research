@@ -54,6 +54,9 @@ class CalcMotion:
         )
         old_x = particle.position
         new_x = old_x + new_v * self.delta_t
+        # particleモデルの更新
+        particle.position = new_x
+        particle.position = new_v
         return new_x
 
     def test(self):

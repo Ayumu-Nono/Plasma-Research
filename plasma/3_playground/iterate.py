@@ -45,6 +45,7 @@ class Iterate:
         for particle in self.init.ion.particle_list:
             E_field = E_field_model.calc_electric_field_on_free_point(position=particle.position)
             B_field = np.array([0, 0, 0])
+            # new positionを計算しつつモデルも更新
             new_position = self.motion.calc_new_position(
                 particle=particle,
                 magnetic_field=B_field,
