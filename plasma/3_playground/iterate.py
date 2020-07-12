@@ -33,6 +33,7 @@ class Iterate:
         self.latice = self.init.area.latice
 
     def update_particles_model(self):
+        print('Updating field ...')
         E_field_model = ElectricFieldModel(potential=self.latice)
         # 計算領域内にいる粒子だけ残す
         particle_list = []
@@ -49,15 +50,8 @@ class Iterate:
                 magnetic_field=B_field,
                 electric_field=E_field
             )
-            print(new_position)
+        print('Updated. Particles number is ', len(particle_list))
         
-    # def read_initial_position(self):
-    #     df = pd.read_csv(self.initial_position_csv)
-    #     self.df = df[['position_x', 'position_y', 'position_z']]
-    #     print(self.df.values)
-
-    # def 
-
     def test(self):
         self.update_particles_model()
         pass
