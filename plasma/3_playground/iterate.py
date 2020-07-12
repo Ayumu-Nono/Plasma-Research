@@ -10,14 +10,12 @@ from calc.motion import CalcMotion
 class Iterate:
     def __init__(
         self,
-        initial_position_csv: str,
         particles_num: int,
     ):
         self.motion = CalcMotion()
         print('initializing all in Class "Iterate" ...')
         self.potential_model = ElectricPotentialModel()
         self.init = InitAll(particles_num)
-        self.initial_position_csv = initial_position_csv
         self.init.make_calc_area(10, 1, 1, 2)
         self.init.make_particles()
         self.calc_density = DensityModel()
@@ -46,7 +44,7 @@ class Iterate:
             E_field = E_field_model.calc_electric_field_on_free_point(position=particle.position)
             B_field = np.array([0, 0, 0])
             # new positionを計算しつつモデルも更新
-            new_position = self.motion.calc_new_position(
+            self.motion.calc_new_position(
                 particle=particle,
                 magnetic_field=B_field,
                 electric_field=E_field
@@ -58,7 +56,7 @@ class Iterate:
         pass
 
 def main():
-    i = Iterate('result/position.csv', particles_num=100)
+    i = Iterate(particles_num=100)
     i.test()
 
 
