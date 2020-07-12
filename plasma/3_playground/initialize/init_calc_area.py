@@ -37,14 +37,13 @@ class CalcArea:
         position: np.array
     ) -> bool:
         is_out_of_area = (
-            position[0] > 1
-            and position[1] > 1
-            and position[2] > 1
-            and position[0] < len(self.latice) - 2
-            and position[1] < len(self.latice) - 2
-            and position[2] < len(self.latice) - 2
+            position[0] < 1
+            and position[1] < 1
+            and position[2] < 1
+            and position[0] > len(self.latice) - 2
+            and position[1] > len(self.latice) - 2
+            and position[2] > len(self.latice) - 2
         )
-        is_out_of_area = not is_out_of_area
         return is_out_of_area
         
     def is_in_calc_area(
@@ -52,8 +51,8 @@ class CalcArea:
         position: np.array
     ) -> bool:
         is_calc_area = (
-            not self.is_inner_engine
-            and not self.is_out_of_area 
+            not self.is_inner_engine(position=position)
+            and not self.is_out_of_area(position=position) 
         )
         return is_calc_area
 
