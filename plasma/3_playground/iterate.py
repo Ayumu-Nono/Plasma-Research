@@ -54,6 +54,13 @@ class Iterate:
     def push_info_to_grid(self):
         print('Pushing to grid ...')
         self.latice = self.latice = self.init.area.latice
+        # 計算領域内にいる粒子だけ残す
+        particle_list = []
+        for index, particle in enumerate(self.init.ion.particle_list):
+            if self.init.area.is_in_calc_area(position=particle.position):
+                particle_list.append(particle)
+        self.init.ion.particle_list = particle_list
+        ## 選別メソッドここまで
         for particle in self.init.ion.particle_list:
             density_array = self.calc_density.calc_density_array(particle.position)
             for grid_num in range(8):
