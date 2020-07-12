@@ -4,6 +4,7 @@ import pandas as pd
 from init_all import InitAll
 from calc.density import DensityModel
 from calc.electric_potential import ElectricPotentialModel
+from calc.electric_field import ElectricFieldModel
 
 class Iterate:
     def __init__(
@@ -30,6 +31,10 @@ class Iterate:
         self.latice = self.init.area.latice
         print(self.potential_model.calc_electric_potential_with_no_collision(self.init.area.latice))
 
+    def update_field(self):
+        E_field_model = ElectricFieldModel(potential=self.latice)
+        E_field = E_field_model.calc_electric_field_on_free_point(np.array([1,2,3]))
+        print(E_field)
 
     # def read_initial_position(self):
     #     df = pd.read_csv(self.initial_position_csv)
@@ -39,12 +44,12 @@ class Iterate:
     # def 
 
     def test(self):
-        # self.read_initial_position()
+        self.update_field()
         pass
 
 def main():
-    i = Iterate('result/position.csv', particles_num=10)
-    # i.test()
+    i = Iterate('result/position.csv', particles_num=1000)
+    i.test()
 
 
 if __name__ == "__main__":

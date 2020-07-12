@@ -1,7 +1,8 @@
 import numpy as np
 import math
 
-from pic_module import PICModule
+from .pic_module import PICModule
+
 
 class ElectricFieldModel(PICModule):
 
@@ -9,14 +10,8 @@ class ElectricFieldModel(PICModule):
     
     def __init__(
         self,
+        potential: np.array
     ):
-        pass
-
-    def set_electric_potential(
-        self,
-        cell_num: int 
-    ) -> None:
-        potential = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num) * 10
         self.electric_potential = potential
 
     def calc_electric_field_on_grid(
@@ -42,14 +37,20 @@ class ElectricFieldModel(PICModule):
         electric_field = 0
         for grid_num in range(8):
             electric_field += self.calc_electric_field_on_grid(surrounding_grid_array[grid_num]) \
-                * volume_ratio_array[grid_num)]
+                * volume_ratio_array[grid_num]
         return electric_field
 
+    def set_electric_potential_for_test(
+        self,
+        cell_num: int 
+    ) -> None:
+        potential = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num) * 10
+        self.electric_potential_for_test = potential
 
     
 def main():
     field = ElectricFieldModel()
-    field.set_electric_potential(10)
+    field.set_electric_potential_for_test(10)
     field.calc_electric_field_on_free_point(np.array([3.2, 4.5, 5.1]))
 
 
