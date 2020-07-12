@@ -1,6 +1,6 @@
 import numpy as np
 
-from pic_module import PICModule
+from .pic_module import PICModule
 
 class DensityModel(PICModule):
 
