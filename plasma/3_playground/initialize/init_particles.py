@@ -17,8 +17,8 @@ class NeutralPatricles:
     def make_particles(self) -> None:
         self.particle_list = []
         for pk in range(self.particles_num):
-            init_position = np.random.rand(3)
-            init_velocity = np.random.rand(3)
+            init_position = np.random.rand(3) * 10
+            init_velocity = np.random.rand(3) * 10
             particle = ParticleModel(
                 pk=pk,
                 init_position=init_position,
@@ -42,8 +42,8 @@ class IonizedPatricles:
     def make_particles(self) -> None:
         self.particle_list = []
         for pk in range(self.particles_num):
-            init_position = np.random.rand(3)
-            init_velocity = np.random.rand(3)
+            init_position = np.random.rand(3) * 9
+            init_velocity = np.random.rand(3) * 9
             particle = ParticleModel(
                 pk=pk,
                 init_position=init_position,

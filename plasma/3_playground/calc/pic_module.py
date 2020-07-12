@@ -43,7 +43,7 @@ class PICModule:
         self,
         position: np.array
     ) -> np.array:
-        if not np.all(position > 0):
+        if not np.all(position >= 0):
             print('ERROR: Position array contain not positive number.')
             raise KeyboardInterrupt
         position_floor = np.floor(position).astype(np.int64)
@@ -73,7 +73,7 @@ class PICModule:
             volume_x0_y1_z1,
             volume_x1_y1_z1
         ])
-        if not np.sum(volume_array) == 1:
+        if not abs(np.sum(volume_array) - 1) < 1E-8 :
             print('Volume sum not equal 1')
             raise KeyboardInterrupt
         # 逆順にすることを忘れずに

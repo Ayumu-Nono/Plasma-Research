@@ -15,11 +15,9 @@ class Iterate:
         self.initial_position_csv = initial_position_csv
         self.init.make_calc_area(10, 1, 3, 2)
         self.init.make_particles()
-        print(self.init.ion.particle_list)
         self.calc_density = DensityModel()
         for particle_pk in range(len(self.init.ion.particle_list)):
             density_array = self.calc_density.calc_density_array(self.init.ion.particle_list[particle_pk].position)
-            print(density_array)
             for grid_num in range(8):
                 grid = density_array[grid_num][0]
                 volume = density_array[grid_num][1]
