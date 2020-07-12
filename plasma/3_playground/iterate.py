@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 
 from init_all import InitAll
 from calc.density import DensityModel
@@ -31,7 +32,7 @@ class Iterate:
                 self.latice[grid_x, grid_y, grid_z] += volume
 
     def update_particles_model(self):
-        print('Updating field ...')
+        # print('Updating field ...')
         E_field_model = ElectricFieldModel(potential=self.latice)
         # 計算領域内にいる粒子だけ残す
         particle_list = []
@@ -49,10 +50,10 @@ class Iterate:
                 magnetic_field=B_field,
                 electric_field=E_field
             )
-        print('Updated. Particles number is ', len(particle_list))
+        # print('Updated. Particles number is ', len(particle_list))
 
     def push_info_to_grid(self):
-        print('Pushing to grid ...')
+        # print('Pushing to grid ...')
         self.latice = self.latice = self.init.area.latice
         # 計算領域内にいる粒子だけ残す
         particle_list = []
@@ -72,13 +73,13 @@ class Iterate:
                 self.latice[grid_x, grid_y, grid_z] += volume
         
     def iterate(self):
-        for timestep in range(100):
+        for timestep in tqdm(range(1000)):
             self.update_particles_model()
             self.push_info_to_grid()
         
 
 def main():
-    i = Iterate(particles_num=1000)
+    i = Iterate(particles_num=100)
     i.iterate()
 
 
