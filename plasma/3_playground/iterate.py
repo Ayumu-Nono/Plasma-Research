@@ -19,8 +19,8 @@ class Iterate:
         self.init.make_calc_area(10, 1, 1, 2)
         self.init.make_particles()
         self.calc_density = DensityModel()
-        for particle_pk in range(len(self.init.ion.particle_list)):
-            density_array = self.calc_density.calc_density_array(self.init.ion.particle_list[particle_pk].position)
+        for particle in self.init.ion.particle_list:
+            density_array = self.calc_density.calc_density_array(particle.position)
             for grid_num in range(8):
                 grid = density_array[grid_num][0]
                 volume = density_array[grid_num][1]
@@ -50,9 +50,13 @@ class Iterate:
                 electric_field=E_field
             )
         print('Updated. Particles number is ', len(particle_list))
+
+    def push_info_to_grid(self):
+        print('Pushing to grid ...')
         
     def test(self):
         self.update_particles_model()
+        self.push_info_to_grid()
         pass
 
 def main():
