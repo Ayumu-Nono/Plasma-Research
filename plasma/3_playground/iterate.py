@@ -29,10 +29,12 @@ class Iterate:
                 grid_z = grid[2]
                 self.init.area.latice[grid_x, grid_y, grid_z] += volume
         self.latice = self.init.area.latice
-        print(self.potential_model.calc_electric_potential_with_no_collision(self.init.area.latice))
+        # print(self.potential_model.calc_electric_potential_with_no_collision(self.init.area.latice))
 
     def update_field(self):
         E_field_model = ElectricFieldModel(potential=self.latice)
+        for particle in self.init.ion.particle_list:
+            pass
         E_field = E_field_model.calc_electric_field_on_free_point(np.array([1,2,3]))
         print(E_field)
 
@@ -48,7 +50,7 @@ class Iterate:
         pass
 
 def main():
-    i = Iterate('result/position.csv', particles_num=1000)
+    i = Iterate('result/position.csv', particles_num=100)
     i.test()
 
 
