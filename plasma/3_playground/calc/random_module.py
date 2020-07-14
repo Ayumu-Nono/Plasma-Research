@@ -14,9 +14,19 @@ class RandomModule:
     def test(self):
         f = open('test.csv', 'w')
         f.write("x,y,z\n")
-        for i in range(100):
+        for i in range(100000):
             x = self.Box_Muller_method_3D()
+            # x = np.random.rand(3)
+            # x = np.random.normal(loc=0, scale=1, size=3)
             f.write(str(x[0]) + ',' + str(x[1]) + ',' + str(x[2]) + '\n')
+
+    def test_draw(self):
+        import pandas as pd 
+        import matplotlib.pyplot as plt
+        df = pd.read_csv('test.csv')
+        df['x'].hist()
+        plt.show()
+        # print(df)
 
 
 
@@ -25,3 +35,4 @@ class RandomModule:
 if __name__ == "__main__":
     r = RandomModule()
     r.test()
+    r.test_draw()
