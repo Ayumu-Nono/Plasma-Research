@@ -15,7 +15,7 @@ class ChargeExchangeModel:
         density_of_ion: float,
         velocity_of_neutral: np.array,
         velocity_of_ion: np.array
-    ) -> int:
+    ) -> float:
         n_n = density_of_neutral
         n_i = density_of_ion
         v_r = np.linalg.norm(velocity_of_ion - velocity_of_neutral)
