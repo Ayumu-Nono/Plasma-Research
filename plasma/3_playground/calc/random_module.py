@@ -31,7 +31,6 @@ class RandomModule:
 
 
 
-
 if __name__ == "__main__":
     r = RandomModule()
     r.test()
