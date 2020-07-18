@@ -13,6 +13,15 @@ class CalcArea:
         boundary_layer = 2
         lattices_num = int(area_scale / lattices_scale) + boundary_layer * 2 
         self.lattices = np.zeros((lattices_num, lattices_num, lattices_num))
+    
+    def make_cells(
+        self,
+        area_scale: int,
+        cells_scale: int,
+    ) -> None:
+        boundary_layer = 2
+        cells_num = int(area_scale / cells_scale) + boundary_layer * 2
+        self.cells = np.zeros((cells_num, cells_num, cells_num))
 
     def set_engine(
         self,
