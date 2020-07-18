@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 
 from initialize.init_calc_area import CalcArea
-from initialize.init_particles import NeutralPatricles, IonizedPatricles 
+from initialize.init_particles import NeutralPatricles, IonizedPatricles
+from initialize.model.cell_manager import CellManager
 
 
 class InitAll:

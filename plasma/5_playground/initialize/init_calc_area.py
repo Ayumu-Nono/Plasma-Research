@@ -1,5 +1,7 @@
 import numpy as np
 
+from model.cell_manager import CellManager
+
 
 class CalcArea:
 
@@ -21,7 +23,8 @@ class CalcArea:
     ) -> None:
         boundary_layer = 2
         cells_num = int(area_scale / cells_scale) + boundary_layer * 2
-        self.cells = np.zeros((cells_num, cells_num, cells_num))
+        self.cell_manager = CellManager(cells_num=cells_num)
+        print(self.cell_manager.cells)
 
     def set_engine(
         self,
@@ -67,6 +70,7 @@ class CalcArea:
         return is_calc_area
 
     def test(self):
+        self.make_cells(10, 1)
         self.make_lattices(10,1)
         self.set_engine(radius=5.1, length=2)
 
