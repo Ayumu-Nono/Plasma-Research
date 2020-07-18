@@ -20,7 +20,7 @@ class Iterate:
         self.init.make_calc_area(10, 1, 1, 2)
         self.init.make_particles()
         self.calc_density = DensityModel()
-        self.latice = self.init.area.latice
+        self.lattices = self.init.area.lattices
         for particle in self.init.ion.particle_list:
             density_array = self.calc_density.calc_density_array(particle.position)
             for grid_num in range(8):
@@ -29,11 +29,11 @@ class Iterate:
                 grid_x = grid[0]
                 grid_y = grid[1]
                 grid_z = grid[2]
-                self.latice[grid_x, grid_y, grid_z] += volume
+                self.lattices[grid_x, grid_y, grid_z] += volume
 
     def update_particles_model(self):
         # print('Updating field ...')
-        E_field_model = ElectricFieldModel(potential=self.latice)
+        E_field_model = ElectricFieldModel(potential=self.lattices)
         # 計算領域内にいる粒子だけ残す
         particle_list = []
         for index, particle in enumerate(self.init.ion.particle_list):
@@ -54,7 +54,7 @@ class Iterate:
 
     def push_info_to_grid(self):
         # print('Pushing to grid ...')
-        self.latice = self.latice = self.init.area.latice
+        self.lattices = self.lattices = self.init.area.lattices
         # 計算領域内にいる粒子だけ残す
         particle_list = []
         for index, particle in enumerate(self.init.ion.particle_list):
@@ -70,7 +70,7 @@ class Iterate:
                 grid_x = grid[0]
                 grid_y = grid[1]
                 grid_z = grid[2]
-                self.latice[grid_x, grid_y, grid_z] += volume
+                self.lattices[grid_x, grid_y, grid_z] += volume
         
     def iterate(self):
         for timestep in tqdm(range(1000)):

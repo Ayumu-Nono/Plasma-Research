@@ -5,14 +5,14 @@ class CalcArea:
 
     """境界条件・計算領域内判定"""
     
-    def make_latice(
+    def make_lattices(
         self,
         era_scale: int,
-        latice_scale: int,
+        lattices_scale: int,
     ) -> None:
         boundary_layer = 2
-        latice_num = int(era_scale / latice_scale) + boundary_layer * 2 
-        self.latice = np.zeros((latice_num, latice_num, latice_num))
+        lattices_num = int(era_scale / lattices_scale) + boundary_layer * 2 
+        self.lattices = np.zeros((lattices_num, lattices_num, lattices_num))
 
     def set_engine(
         self,
@@ -40,9 +40,9 @@ class CalcArea:
             position[0] > 1
             and position[1] > 1
             and position[2] > 1
-            and position[0] < len(self.latice) - 2
-            and position[1] < len(self.latice) - 2
-            and position[2] < len(self.latice) - 2
+            and position[0] < len(self.lattices) - 2
+            and position[1] < len(self.lattices) - 2
+            and position[2] < len(self.lattices) - 2
         )
         is_out_of_area = not is_out_of_area
         return is_out_of_area
@@ -58,7 +58,7 @@ class CalcArea:
         return is_calc_area
 
     def test(self):
-        self.make_latice(10,1)
+        self.make_lattices(10,1)
         self.set_engine(radius=5.1, length=2)
 
 def main():

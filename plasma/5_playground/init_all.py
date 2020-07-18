@@ -14,11 +14,11 @@ class InitAll:
     def make_calc_area(
         self,
         era_scale: int,
-        latice_scale: int,
+        lattices_scale: int,
         engine_radius: float,
         engine_length: float
     ) -> None:
-        self.area.make_latice(era_scale=era_scale, latice_scale=latice_scale)
+        self.area.make_lattices(era_scale=era_scale, lattices_scale=lattices_scale)
         self.area.set_engine(radius=engine_radius, length=engine_length)
 
     def make_particles(self) -> None:
