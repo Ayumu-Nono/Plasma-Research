@@ -3,7 +3,6 @@ import pandas as pd
 
 from initialize.init_calc_area import CalcArea
 from initialize.init_particles import NeutralPatricles, IonizedPatricles
-from initialize.model.cell_manager import CellManager
 
 
 class InitAll:
@@ -20,6 +19,7 @@ class InitAll:
         engine_length: float
     ) -> None:
         self.area.make_lattices(area_scale=area_scale, lattices_scale=lattices_scale)
+        self.area.make_cells(area_scale=area_scale, cells_scale=cells_scale)
         self.area.set_engine(radius=engine_radius, length=engine_length)
 
     def make_particles(self) -> None:
