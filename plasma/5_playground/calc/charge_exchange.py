@@ -2,12 +2,13 @@ import numpy as np
 import math
 
 from .random_module import RandomModule
-from ..initialize.model.initial_quantity import PhysicalQuantity()
+from ..initialize.model.initial_quantity import PhysicalQuantity, NumericalQuantity
 
 class ChargeExchangeModel:
     def __init__(self):
         self.random_module = RandomModule()
         self.physical_quantity = PhysicalQuantity()
+        self.numerical_quantity = NumericalQuantity()
     
     def is_collide(
         self,
@@ -17,7 +18,10 @@ class ChargeExchangeModel:
         distance = np.linalg.norm(
             ion_particle.position - neutral_particle
         )
+        collision_distance = self.numerical_quantity.collision_distance
+        return distance < collision_distance
         
+
     def generate_rate(
         self,
         density_of_neutral: float,
