@@ -3,6 +3,7 @@ import math
 
 from .random_module import RandomModule
 from ..initialize.model.initial_quantity import PhysicalQuantity, NumericalQuantity
+from ..initialize.model.particle import ParticleModel
 
 class ChargeExchangeModel:
     def __init__(self):
@@ -16,11 +17,22 @@ class ChargeExchangeModel:
         neutral_particle,
     ) -> bool:
         distance = np.linalg.norm(
-            ion_particle.position - neutral_particle
+            ion_particle.position - neutral_particle.position
         )
         collision_distance = self.numerical_quantity.collision_distance
         return distance < collision_distance
-        
+
+    def exchange_velocity(
+        self,
+        ion_particle,
+        neutral_particle
+    ) -> None:
+        ion_velocity = ion_particle.velocity
+        neutral_velocity = neutral_particle.velocity
+        ion_particle.velocity = neutral_velocity
+        neutral_particle.velocity = ion_velocity
+
+
     def generate_rate(
         self,
         density_of_neutral: float,
