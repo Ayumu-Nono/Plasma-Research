@@ -1,6 +1,6 @@
 import numpy as np
 
-from model.cell_manager import CellManager
+from .model.cell_manager import CellManager
 
 
 class CalcArea:
