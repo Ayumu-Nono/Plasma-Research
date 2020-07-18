@@ -27,10 +27,12 @@ class InitAll:
         self.ion.make_particles()
 
 def main():
-    init = InitAll(100)
+    init = InitAll(1000)
     init.make_calc_area(10, 1, 3, 2)
     init.make_particles()
-    print(init.ion.particle_list[0].position)
+    # print(init.ion.particle_list)
+    init.area.cell_manager.save_particles_to_cell(init.ion.particle_list)
+    print(init.area.cell_manager.cells[0])
     # from result.save import Save
     # save = Save('result/position.csv')
     # for pk in range(len(init.ion.particle_list)):

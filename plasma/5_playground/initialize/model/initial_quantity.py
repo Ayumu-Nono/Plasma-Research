@@ -2,7 +2,11 @@ import numpy as np
 
 
 class NumericalQuantity:
-    pass
+    
+    """計算に用いる定数"""
+
+    def __init__(self):
+        self.collision_distance = 1E-3
 
 
 class PhysicalQuantity:

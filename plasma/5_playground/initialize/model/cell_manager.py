@@ -15,9 +15,9 @@ class CellManager:
         for particle in particles_list:
             position = particle.position
             position_floor = np.floor(position)
-            cell_x = position_floor[0]
-            cell_y = position_floor[1]
-            cell_z = position_floor[2]
+            cell_x = int(position_floor[0])
+            cell_y = int(position_floor[1])
+            cell_z = int(position_floor[2])
             self.cells[cell_x][cell_y][cell_z].append(particle)    
 
 

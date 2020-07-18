@@ -24,7 +24,6 @@ class CalcArea:
         boundary_layer = 2
         cells_num = int(area_scale / cells_scale) + boundary_layer * 2
         self.cell_manager = CellManager(cells_num=cells_num)
-        print(self.cell_manager.cells)
 
     def set_engine(
         self,

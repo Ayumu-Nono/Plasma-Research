@@ -14,8 +14,10 @@ class ChargeExchangeModel:
         ion_particle,
         neutral_particle,
     ) -> bool:
-        pass
-
+        distance = np.linalg.norm(
+            ion_particle.position - neutral_particle
+        )
+        
     def generate_rate(
         self,
         density_of_neutral: float,
