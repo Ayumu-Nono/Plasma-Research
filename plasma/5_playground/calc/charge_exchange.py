@@ -21,7 +21,6 @@ class ChargeExchangeModel:
         collision_distance = self.numerical_quantity.collision_distance
         return distance < collision_distance
         
-
     def generate_rate(
         self,
         density_of_neutral: float,
