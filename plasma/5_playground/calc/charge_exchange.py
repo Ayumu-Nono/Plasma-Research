@@ -9,6 +9,13 @@ class ChargeExchangeModel:
         self.random_module = RandomModule()
         self.physical_quantity = PhysicalQuantity()
     
+    def is_collide(
+        self,
+        ion_particle,
+        neutral_particle,
+    ) -> bool:
+        pass
+
     def generate_rate(
         self,
         density_of_neutral: float,
