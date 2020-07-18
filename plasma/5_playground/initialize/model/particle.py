@@ -20,9 +20,12 @@ class ParticleModel:
         self.mass: float = self.physical_quantity.xenon_mass
 
     def as_ion(self) -> None:
-        self.type:str = "ion"
+        self.type: str = "ion"
         self.charge: float = self.physical_quantity.elementary_charge
         self.mass: float = self.physical_quantity.xenon_mass
+
+    def change_to_charge_exchange_ion(self) -> None:
+        self.type: str = "CEX"
 
     def change_status(
         self,
