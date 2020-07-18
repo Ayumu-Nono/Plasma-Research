@@ -7,11 +7,11 @@ class CalcArea:
     
     def make_lattices(
         self,
-        era_scale: int,
+        area_scale: int,
         lattices_scale: int,
     ) -> None:
         boundary_layer = 2
-        lattices_num = int(era_scale / lattices_scale) + boundary_layer * 2 
+        lattices_num = int(area_scale / lattices_scale) + boundary_layer * 2 
         self.lattices = np.zeros((lattices_num, lattices_num, lattices_num))
 
     def set_engine(
