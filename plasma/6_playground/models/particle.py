@@ -1,6 +1,11 @@
+import sys
+import pathlib
+root_dir = pathlib.Path(__file__).resolve().parent.parent
+sys.path.append(str(root_dir))
+
 import numpy as np
 
-import physical_quantity as pq
+from models import physical_quantity as pq
 
 
 class Particle:

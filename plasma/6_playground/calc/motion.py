@@ -2,9 +2,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pathlib
+import sys
 
-current_dir = pathlib.Path(__file__).resolve().parent
-sys.path.append( str(current_dir) + '/../' )
+root_dir = pathlib.Path(__file__).resolve().parent.parent
+sys.path.append(str(root_dir))
 from calc.electric_field import ElectricField
 from utils.pic_module import PICModule
 from models import physical_quantity as pq

@@ -1,9 +1,10 @@
 import numpy as np
 import math
 import pathlib
+import sys
 
-current_dir = pathlib.Path(__file__).resolve().parent
-sys.path.append( str(current_dir) + '/../' )
+root_dir = pathlib.Path(__file__).resolve().parent.parent
+sys.path.append(str(root_dir))
 from utils.pic_module import PICModule
 from utils.random_module import RandomModule
 

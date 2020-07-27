@@ -1,8 +1,8 @@
 import numpy as np
 
-from cells import Cells
-from engine import Engine
-from lattices import Lattices
+from .cells import Cells
+from .engine import Engine
+from .lattices import Lattices
 
 
 class CalcArea:
