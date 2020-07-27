@@ -1,17 +1,18 @@
 import numpy as np
+import pathlib
+import sys
+
+root_dir = pathlib.Path(__file__).resolve().parent.parent
+sys.path.append(str(root_dir))
+from models import numerical_quantity as nq
 
 
 class Engine:
 
     """エンジンモデル"""
 
-    def __init__(
-        self,
-        radius: float,
-        length:float,
-    ) -> None:
-        self.radius = radius
-        self.length = length
+    radius = nq.ENGINE_RADIUS
+    length = nq.ENGINE_LENGTH
 
     def is_inner_engine(
         self,

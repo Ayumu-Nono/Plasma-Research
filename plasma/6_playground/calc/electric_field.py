@@ -9,7 +9,7 @@ sys.path.append(str(root_dir))
 from utils.pic_module import PICModule
 
 
-class ElectricFieldModel(PICModule):
+class ElectricField(PICModule):
 
     """"電場を定義"""
     

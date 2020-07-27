@@ -1,1 +1,5 @@
-STEP_SIZE = 1  # [s]
+STEP_SIZE = 0.001  # [s]
+END_STEP = 10000  # [回]
+ENGINE_RADIUS = 3  # [m]
+ENGINE_LENGTH = 3  # [m]
+LATTICE_NUM = 1000  # [個]

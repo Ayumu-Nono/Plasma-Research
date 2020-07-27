@@ -1,18 +1,16 @@
 import numpy as np
+import pathlib
+import sys
+
+root_dir = pathlib.Path(__file__).resolve().parent.parent
+sys.path.append(str(root_dir))
+from models import numerical_quantity as nq
 
 
 class Lattices:
 
     """格子モデル"""
-
-    def __init__(
-        self,
-        area_scale: float,
-        lattice_scale: float,
-    ) -> None:
-        boundary_layer = 2
-        lattices_num = int(area_scale / lattice_scale) + boundary_layer * 2 
-        self.lattices = np.zeros((lattices_num, lattices_num, lattices_num))
+    lattices = np.zeros((nq.LATTICE_NUM, nq.LATTICE_NUM, nq.LATTICE_NUM))
 
     def is_out_of_lattices(
         self,

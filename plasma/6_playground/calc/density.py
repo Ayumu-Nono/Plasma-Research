@@ -9,7 +9,7 @@ from utils.pic_module import PICModule
 from utils.random_module import RandomModule
 
 
-class DensityModel(PICModule):
+class Density(PICModule):
 
     """格子点における粒子密度を計算"""
     # TODO 粒子ひとつあたりに、現実世界の粒子何個分に相当させるか考える->変数self.particle_magnification
