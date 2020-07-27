@@ -1,4 +1,4 @@
-from module.module2 import Module2
+import module as m
 
 
 class ModuleTest:
@@ -7,5 +7,5 @@ class ModuleTest:
 
 if __name__ == "__main__":
     module_test = ModuleTest()
-    m2 = Module2()
+    m2 = m.Module2()
     m2.func_in_module2()
