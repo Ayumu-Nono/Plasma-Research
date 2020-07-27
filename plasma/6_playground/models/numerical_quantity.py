@@ -1,0 +1,1 @@
+STEP_SIZE = 1  # [s]

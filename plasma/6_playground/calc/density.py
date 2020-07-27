@@ -1,36 +1,41 @@
 import numpy as np
-import math
-import pathlib
 
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.append( str(current_dir) + '/../' )
 from utils.pic_module import PICModule
 from utils.random_module import RandomModule
-from models import physical_quantity as pq
 
 
-class ElectricPotential:
+class DensityModel(PICModule):
 
-    """電位を定義"""
-    # TODO potentialの計算式どうする？
-    
+    """格子点における粒子密度を計算"""
+    # TODO 粒子ひとつあたりに、現実世界の粒子何個分に相当させるか考える->変数self.particle_magnification
+
     def __init__(self):
-        pass
-        
-    def calc_electric_potential_with_no_collision(
+        self.particle_magnification = 100
+        self.pic = PICModule()
+
+    def calc_density_array(
         self,
-        ion_density: np.array
-    ) -> np.array:
-        k = pq.BOLTZMANN_CONSTANT
-        T = pq.ELECTRON_TEMPATATURE
-        e = pq.ELEMENTARY_CHARGE
-        n0 = pq.PLASMA_DENSITY
-        #  ここiondensityが0の時どうするの？
-        potential = - k * T * np.log1p(ion_density / n0) / e
-        return potential
+        position: np.array,
+    ) -> list:
+        surrounding_grid_array = self.pic.calc_surrounding_grid(position)
+        volume_array = self.pic.calc_volume_array(position)
+        grid_volume_set_list = []
+        for grid_num in range(8):
+            grid_volume_set_list.append(
+                [surrounding_grid_array[grid_num], volume_array[grid_num]]
+            )
+        grid_volume_set_array = np.array(grid_volume_set_list)
+        return grid_volume_set_array
 
 def main():
-    potential = ElectricPotentialModel()
+    d = DensityModel()
+    # f = open('density_sample.csv', "w")
+    # cell_num = 100
+    # density_sample_array = np.random.rand(cell_num ** 3).reshape(cell_num, cell_num, cell_num) * 10
+    
+    d.calc_density_array(np.array([1, 2.2, 3.4]))
 
 
 if __name__ == "__main__":
