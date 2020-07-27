@@ -1,6 +1,7 @@
 # プラズマを粒子的に解く
 import numpy as np
 import matplotlib.pyplot as plt
+import pathlib
 
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.append( str(current_dir) + '/../' )
