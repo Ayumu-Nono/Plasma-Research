@@ -1,0 +1,40 @@
+import numpy as np
+
+import physical_quantity as pq
+
+
+class Particle:
+
+    """"粒子モデル"""
+
+    def __init__(
+        self,
+        pk: int,  # primary_key
+        init_position: np.array,
+        init_velocity: np.array,
+    ) -> None:
+        self.pk = pk
+        self.position = init_position
+        self.velocity = init_velocity
+
+    def as_neutral(self) -> None:
+        self.type: str = "neutral"
+        self.charge: float = 0
+        self.mass: float = pq.XENON_MASS
+
+    def as_ion(self) -> None:
+        self.type: str = "ion"
+        self.charge: float = pq.ELEMENTARY_CHARGE
+        self.mass: float = pq.XENON_MASS
+
+    def change_to_CEX_ion(self) -> None:
+        self.type: str = "CEX"
+
+    def change_status(
+        self,
+        new_position: np.array,
+        new_velocity: np.array
+    ) -> None:
+        self.position = new_position
+        self.velocity = new_velocity
+
