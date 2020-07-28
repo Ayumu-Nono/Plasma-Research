@@ -3,7 +3,6 @@ import pathlib
 
 import numpy as np
 from tqdm import tqdm
-from multiprocessing import Pool
 
 root_dir = pathlib.Path(__file__).resolve().parent.parent
 sys.path.append(str(root_dir))
@@ -20,13 +19,11 @@ from models.particle import Particle
 class Iterate:
     def __init__(
         self,
-        particles_num: int,
+        init_object,
     ):
+        self.init = init_object
         self.motion = CalcMotion()
-        print('initializing all in Class "Iterate" ...')
         self.potential_model = ElectricPotential()
-        self.init = Initialize(particles_num)
-        self.init.init_all()
         self.calc_density = Density()
         self.lattices = self.init.area.lattices
         for particle in self.init.ion_list:
