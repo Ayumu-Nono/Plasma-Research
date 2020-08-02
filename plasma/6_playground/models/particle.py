@@ -28,12 +28,12 @@ class Particle:
         self.mass: float = pq.XENON_MASS
 
     def as_ion(self) -> None:
-        self.type: str = "ion"
-        self.charge: float = pq.ELEMENTARY_CHARGE
-        self.mass: float = pq.XENON_MASS
+        self.type = "ion"
+        self.charge = pq.ELEMENTARY_CHARGE
+        self.mass = pq.XENON_MASS
 
     def change_to_CEX_ion(self) -> None:
-        self.type: str = "CEX"
+        self.type = "CEX"
 
     def change_status(
         self,

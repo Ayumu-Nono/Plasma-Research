@@ -16,12 +16,20 @@ class Evaluate:
 
     """"全体フロー(探査機風メソッド名)"""
 
-    def __init__(self, initial_particles_num: int) -> None:
-        self.initial_particles_num = initial_particles_num
+    def __init__(
+        self,
+        initial_ion_num: int,
+        initial_neutral_num: int,
+    ) -> None:
+        self.initial_ion_num = initial_ion_num
+        self.initial_neutral_num = initial_neutral_num
 
     def launch(self) -> None:
         print('initializing all in Class "Initialize" ...')    
-        self.init = Initialize(particles_num=self.initial_particles_num)
+        self.init = Initialize(
+            ion_num=self.initial_ion_num,
+            neutral_num=self.initial_neutral_num,
+        )
         self.init.init_all()
 
     def sailing(self) -> None:

@@ -24,7 +24,7 @@ class ChargeExchange:
         distance = np.linalg.norm(
             ion_particle.position - neutral_particle.position
         )
-        collision_distance = self.numerical_quantity.collision_distance
+        collision_distance = nq.COLLOSION_DISTANCE
         return distance < collision_distance
 
     def exchange_velocity(
@@ -48,7 +48,7 @@ class ChargeExchange:
         n_i = density_of_ion
         v_r = np.linalg.norm(velocity_of_ion - velocity_of_neutral)
         v_i = np.linalg.norm(velocity_of_ion)
-        kinetic_energy = (1/ 2) * pq.XENON_MASS * v_i **2
+        kinetic_energy = (1 / 2) * pq.XENON_MASS * v_i ** 2
         cross_section = 87.3 - 13.6 * math.log(kinetic_energy)
         generate_rate = n_n * n_i * v_r * cross_section
         return generate_rate
@@ -58,5 +58,5 @@ class ChargeExchange:
 
 
 if __name__ == "__main__":
-    cex = ChargeExchangeModel()
+    cex = ChargeExchange()
     cex.test()

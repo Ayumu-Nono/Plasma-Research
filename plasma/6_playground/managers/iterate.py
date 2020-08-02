@@ -25,6 +25,7 @@ class Iterate:
         self.motion = CalcMotion()
         self.potential_model = ElectricPotential()
         self.calc_density = Density()
+        self.cex = ChargeExchange()
         self.lattices = self.init.area.lattices
         for particle in self.init.ion_list:
             density_array = self.calc_density.calc_density_array(
@@ -63,6 +64,9 @@ class Iterate:
             grid_y = grid[1]
             grid_z = grid[2]
             self.lattices[grid_x, grid_y, grid_z] += volume
+
+    def calc_cex_rate(self) -> None:
+        pass
 
     def choose_particles_in_calc_area(self) -> None:
         # 計算領域内にいる粒子だけ残す
