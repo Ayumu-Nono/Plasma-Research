@@ -32,7 +32,6 @@ class ChargeExchangeModel:
         ion_particle.velocity = neutral_velocity
         neutral_particle.velocity = ion_velocity
 
-
     def generate_rate(
         self,
         density_of_neutral: float,
