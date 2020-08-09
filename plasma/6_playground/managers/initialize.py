@@ -58,7 +58,7 @@ def main():
     init = Initialize(ion_num=100, neutral_num=10)
     init.init_all()
     print(1)
-    print(init.area.lattices)
+    print(init.area.lattice_for_neutral.density)
 
 
 if __name__ == "__main__":

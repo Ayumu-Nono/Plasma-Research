@@ -26,8 +26,8 @@ class Iterate:
         self.potential_model = ElectricPotential()
         self.calc_density = Density()
         self.cex = ChargeExchange()
-        self.lattices = self.init.area.lattices
-        for particle in self.init.ion_list:
+
+        for particle in self.init.neutral_list:
             density_array = self.calc_density.calc_density_array(
                 position=particle.position
             )
@@ -37,7 +37,7 @@ class Iterate:
                 grid_x = grid[0]
                 grid_y = grid[1]
                 grid_z = grid[2]
-                self.lattices[grid_x, grid_y, grid_z] += volume
+                self.init.area.lattices_for_neutral.density[grid_x, grid_y, grid_z] += volume
         print('Start iterations ... ')
 
     def update_particles_model(self, particle: Particle) -> None:
@@ -63,29 +63,40 @@ class Iterate:
             grid_x = grid[0]
             grid_y = grid[1]
             grid_z = grid[2]
-            self.lattices[grid_x, grid_y, grid_z] += volume
+            self.init.area.lattices_for_neutral.density[grid_x, grid_y, grid_z] += volume
 
     def calc_cex_rate(self) -> None:
         pass
 
     def choose_particles_in_calc_area(self) -> None:
         # 計算領域内にいる粒子だけ残す
+        # neutral
+        particle_list = []
+        for index, particle in enumerate(self.init.neutral_list):
+            if self.init.area.is_in_calc_area(position=particle.position):
+                particle_list.append(particle)
+        self.init.neutral_list = particle_list
+        # ion
         particle_list = []
         for index, particle in enumerate(self.init.ion_list):
             if self.init.area.is_in_calc_area(position=particle.position):
                 particle_list.append(particle)
         self.init.ion_list = particle_list
-
+        
     def each_step(self) -> None:
         # print('Updating field ...')
-        self.E_field_model = ElectricField(potential=self.lattices)
+        self.E_field_model = ElectricField(potential=self.init.area.lattices_for_neutral.density)
         self.choose_particles_in_calc_area()
         for particle in self.init.ion_list:
             self.update_particles_model(particle=particle)
+        for particle in self.init.neutral_list:
+            self.update_particles_model(particle=particle)
         # print('Pushing to grid ...')
-        self.lattices = self.init.area.lattices
+        
         self.choose_particles_in_calc_area()
         for particle in self.init.ion_list:
+            self.push_info_to_grid(particle=particle)
+        for particle in self.init.neutral_list:
             self.push_info_to_grid(particle=particle)
 
     def iterate(self):
@@ -94,8 +105,8 @@ class Iterate:
 
 
 def main():
-    i = Iterate(particles_num=10000)
-    i.iterate()
+    i = Iterate()
+    print(i.init)
 
 
 if __name__ == "__main__":
