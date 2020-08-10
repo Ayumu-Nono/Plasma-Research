@@ -63,6 +63,7 @@ class ChargeExchange(PICModule):
         return velocity_norm
 
     def generate_rate_on_grid(self) -> np.array:
+        self.average_velocity_list_of_ion()  # まず速度を平均化する
         n_n: np.array = self.density_grid_of_neutral
         n_i: np.array = self.density_grid_of_ion
         v_r: np.array = self.calc_velocity_norm()
