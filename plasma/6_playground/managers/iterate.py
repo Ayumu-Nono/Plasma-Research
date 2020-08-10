@@ -40,7 +40,7 @@ class Iterate:
                 self.init.area.lattices_for_neutral.density[grid_x, grid_y, grid_z] += volume
         print('Start iterations ... ')
 
-    def update_particles_model(self, particle: Particle) -> None:
+    def update_particle_model(self, particle: Particle) -> None:
         E_field = self.E_field_model.calc_electric_field_on_free_point(
             position=particle.position
         )
@@ -51,9 +51,8 @@ class Iterate:
             magnetic_field=B_field,
             electric_field=E_field
         )
-        # print('Updated. Particles number is ', len(particle_list))
 
-    def push_info_to_grid(self, particle: Particle):
+    def push_particle_info_to_grid(self, particle: Particle):
         density_array = self.calc_density.calc_density_array(
             position=particle.position
         )
@@ -64,6 +63,14 @@ class Iterate:
             grid_y = grid[1]
             grid_z = grid[2]
             self.init.area.lattices_for_neutral.density[grid_x, grid_y, grid_z] += volume
+        
+    def update_particles_model(self, particles_list: list) -> None:
+        for particle in particles_list:
+            self.update_particle_model(particle=particle)
+
+    def push_particles_info_to_grid(self, particles_list: list) -> None:
+        for particle in particles_list:
+            self.push_particle_info_to_grid(particle=particle)
 
     def calc_cex_rate(self) -> None:
         pass
@@ -87,18 +94,12 @@ class Iterate:
         # print('Updating field ...')
         self.E_field_model = ElectricField(potential=self.init.area.lattices_for_neutral.density)
         self.choose_particles_in_calc_area()
-        for particle in self.init.ion_list:
-            self.update_particles_model(particle=particle)
-        for particle in self.init.neutral_list:
-            self.update_particles_model(particle=particle)
-        # print('Pushing to grid ...')
-        
+        self.update_particles_model(particles_list=self.init.ion_list)
+        self.update_particles_model(particles_list=self.init.neutral_list)
         self.choose_particles_in_calc_area()
-        for particle in self.init.ion_list:
-            self.push_info_to_grid(particle=particle)
-        for particle in self.init.neutral_list:
-            self.push_info_to_grid(particle=particle)
-
+        self.push_particles_info_to_grid(particles_list=self.init.ion_list)
+        self.push_particles_info_to_grid(particles_list=self.init.neutral_list)
+        
     def iterate(self):
         for timestep in tqdm(range(nq.END_STEP)):
             self.each_step()
