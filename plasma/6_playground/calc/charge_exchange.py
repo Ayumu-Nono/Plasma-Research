@@ -17,51 +17,59 @@ class ChargeExchange(PICModule):
     
     def __init__(
         self,
-        density_grid: np.array,
-        velocity_x: np.array,
-        velocity_y: np.array,
-        velocity_z: np.array
+        density_grid_of_neutral: np.array,
+        density_grid_of_ion: np.array,
+        velocity_x_of_ion: np.array,
+        velocity_y_of_ion: np.array,
+        velocity_z_of_ion: np.array
     ) -> None:
         self.random_module = RandomModule()
-        self.density_grid = density_grid
-        self.velocity_list = [velocity_x, velocity_y, velocity_z]
+        self.density_grid_of_neutral = density_grid_of_neutral
+        self.density_grid_of_ion = density_grid_of_ion
+        self.velocity_list_of_ion: list = [
+            velocity_x_of_ion: np.array,
+            velocity_y_of_ion: np.array,
+            velocity_z_of_ion: np.array
+        ]
 
     def calc_ave_velocity_on_all_grid(
         self,
         velocity_grid_in_sum: np.array,
-        density_grid: np.array
+        density_grid_of_ion: np.array
     ) -> np.array:
         velocity_grid_in_ave = np.divide(
             velocity_grid_in_sum,
-            density_grid,
-            out=np.zeros_like(density_grid),
-            where=density_grid!=0)
+            density_grid_of_ion,
+            out=np.zeros_like(density_grid_of_ion),
+            where=density_grid_of_ion!=0)
         return velocity_grid_in_ave
 
-    def average_velocity_list(self) -> None:
-        new_velocity_list = []
-        for velocity_array in self.velocity_list:
+    def average_velocity_list_of_ion(self) -> None:
+        new_velocity_list_of_ion = []
+        for velocity_array in self.velocity_list_of_ion:
             new_velocity_array = self.calc_ave_velocity_on_all_grid(
                 velocity_grid_in_sum=velocity_array,
-                density_grid=self.density_grid
+                density_grid_of_ion=self.density_grid_of_ion
             )
-            new_velocity_list.append(new_velocity_array)
-        self.velocity_list = new_velocity_list
+            new_velocity_list_of_ion.append(new_velocity_array)
+        self.averaged_velocity_list_of_ion = new_velocity_list_of_ion
 
-    def generate_rate(
-        self,
-        density_of_neutral: float,
-        density_of_ion: float,
-        velocity_of_neutral: np.array,
-        velocity_of_ion: np.array
-    ) -> float:
-        n_n = density_of_neutral
-        n_i = density_of_ion
-        v_r = np.linalg.norm(velocity_of_ion - velocity_of_neutral)
-        v_i = np.linalg.norm(velocity_of_ion)
-        kinetic_energy = (1 / 2) * pq.XENON_MASS * v_i ** 2
-        cross_section = 87.3 - 13.6 * math.log(kinetic_energy)
-        generate_rate = n_n * n_i * v_r * cross_section
+    def calc_velocity_norm(self) -> np.array:
+        velocity_x = self.averaged_velocity_list_of_ion[0]
+        velocity_y = self.averaged_velocity_list_of_ion[1]
+        velocity_z = self.averaged_velocity_list_of_ion[2]
+        velocity_norm: np.array = velocity_x**2 + velocity_y**2 + velocity_z**2
+        velocity_norm = np.sqrt(velocity_norm)
+        return velocity_norm
+
+    def generate_rate_on_grid(self) -> np.array:
+        n_n: np.array = self.density_grid_of_neutral
+        n_i: np.array = self.density_grid_of_ion
+        v_r: np.array = self.calc_velocity_norm()
+        v_i: np.array = self.calc_velocity_norm()
+        kinetic_energy: np.array = (1 / 2) * pq.XENON_MASS * v_i ** 2
+        cross_section: np.array = 87.3 - 13.6 * np.log1p(kinetic_energy)
+        generate_rate: np.array = n_n * n_i * v_r * cross_section
         return generate_rate
 
     def test(self):
