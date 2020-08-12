@@ -13,9 +13,9 @@ class CalcArea(Engine, Lattices):
     """計算領域"""
 
     def __init__(self) -> None:
-        self.lattice_for_neutral = Lattices(lattice_type="neutral")
-        self.lattice_for_ion = Lattices(lattice_type="ion")
-        self.lattice_for_CEX = Lattices(lattice_type="CEX")
+        self.lattices_for_neutral = Lattices(lattice_type="neutral")
+        self.lattices_for_ion = Lattices(lattice_type="ion")
+        self.lattices_for_CEX = Lattices(lattice_type="CEX")
 
     def is_in_calc_area(
         self,

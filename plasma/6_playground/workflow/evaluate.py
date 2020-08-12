@@ -43,7 +43,7 @@ class Evaluate:
 
 def voyage_sequence(particles_num: int) -> None:
     start = time.time()
-    e = Evaluate(particles_num)
+    e = Evaluate(particles_num, particles_num)
     e.launch()
     e.sailing()
     e.landing()

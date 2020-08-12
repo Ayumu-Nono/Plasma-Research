@@ -25,9 +25,9 @@ class Lattices:
             position[0] > 1
             and position[1] > 1
             and position[2] > 1
-            and position[0] < len(nq.LATTICE_NUM) - 2
-            and position[1] < len(nq.LATTICE_NUM) - 2
-            and position[2] < len(nq.LATTICE_NUM) - 2
+            and position[0] < nq.LATTICE_NUM - 2
+            and position[1] < nq.LATTICE_NUM - 2
+            and position[2] < nq.LATTICE_NUM - 2
         )
         is_out_of_area = not is_out_of_area
         return is_out_of_area

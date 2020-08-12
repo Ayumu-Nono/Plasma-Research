@@ -27,9 +27,9 @@ class ChargeExchange(PICModule):
         self.density_grid_of_neutral = density_grid_of_neutral
         self.density_grid_of_ion = density_grid_of_ion
         self.velocity_list_of_ion: list = [
-            velocity_x_of_ion: np.array,
-            velocity_y_of_ion: np.array,
-            velocity_z_of_ion: np.array
+            velocity_x_of_ion,
+            velocity_y_of_ion,
+            velocity_z_of_ion
         ]
 
     def calc_ave_velocity_on_all_grid(
