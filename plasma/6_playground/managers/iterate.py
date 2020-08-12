@@ -77,12 +77,12 @@ class Iterate:
         self.CEX = ChargeExchange(
             density_grid_of_neutral=self.init.area.lattices_for_neutral.density,
             density_grid_of_ion=self.init.area.lattices_for_ion.density,
-            velocity_x_of_ion=self.init.area.lattices_for_ion.velocity_x_of_ion,
-            velocity_y_of_ion=self.init.area.lattices_for_ion.velocity_y_of_ion,
-            velocity_z_of_ion=self.init.area.lattices_for_ion.velocity_z_of_ion,
+            velocity_x_of_ion=self.init.area.lattices_for_ion.velocity_x,
+            velocity_y_of_ion=self.init.area.lattices_for_ion.velocity_y,
+            velocity_z_of_ion=self.init.area.lattices_for_ion.velocity_z,
         )
         generate_rate_array = self.CEX.generate_rate_on_grid()
-        self.CEX_list = []
+        self.CEX_list: list = []
         for position_taple, generate_rate in np.ndenumerate(generate_rate_array):
             position = np.array(position_taple)
             generate_num = self.random_module.round_with_bias(generate_rate)
@@ -92,6 +92,7 @@ class Iterate:
                     position=position
                 )
                 self.CEX_list.append(particle)
+                print(self.CEX_list)
         
     def generate_CEX_ion(
         self,
@@ -132,6 +133,7 @@ class Iterate:
         self.choose_particles_in_calc_area()
         self.push_particles_info_to_grid(particles_list=self.init.ion_list)
         self.push_particles_info_to_grid(particles_list=self.init.neutral_list)
+        self.generate_CEX_ions()
         
     def iterate(self):
         for timestep in tqdm(range(nq.END_STEP)):

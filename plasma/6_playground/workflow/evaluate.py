@@ -52,6 +52,6 @@ def voyage_sequence(particles_num: int) -> None:
 
 
 if __name__ == "__main__":
-    pool_num = 5
+    pool_num = 1
     with Pool(pool_num) as p:
-        p.map(voyage_sequence, [10, 100, 1000, 10000])
+        p.map(voyage_sequence, [10, 100])
