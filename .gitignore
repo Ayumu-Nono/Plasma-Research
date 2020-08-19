@@ -1,3 +1,4 @@
+# python
 .vscode/
 MTG/
 __pycache__/
@@ -5,4 +6,7 @@ __pycache__/
 data/
 playground.py
 
+# fortran
 playground.f90
+*.mod
+*.out
