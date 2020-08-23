@@ -1,11 +1,10 @@
 module lattice
-    use numerical_quantity
     implicit none
-    real :: lattice_array(4, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM) = 0
 contains
-    subroutine print_lattice_array()
-        print *, "density   velocity_x  velocity_y  velocity_z"
-        print *, lattice_array(:, 1, 1, 1)
-    end subroutine print_lattice_array
-
+    function make_lattice_array()
+        use numerical_quantity
+        implicit none
+        real :: make_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM)
+        make_lattice_array(:, :) = 0
+    end function
 end module lattice

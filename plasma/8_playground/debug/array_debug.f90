@@ -1,4 +1,4 @@
-module array
+module array_debug
     implicit none
     
 contains
@@ -10,4 +10,4 @@ contains
             print *, array(:, row)
         end do
     end subroutine
-end module array
+end module array_debug
