@@ -1,8 +1,8 @@
 module particle
+    use numerical_quantity
     implicit none
 contains
     function make_particle_array(particle_num)
-        use numerical_quantity
         implicit none
         integer, intent(in) :: particle_num
         real :: make_particle_array(PARTICLE_MODEL_DIMENSION, particle_num)
