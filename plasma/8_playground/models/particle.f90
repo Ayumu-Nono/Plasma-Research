@@ -5,13 +5,6 @@ module particle
     real, PUBLIC :: initial_neutral_array(PARTICLE_MODEL_DIMENSION, INITIAL_NEUTRAL_NUM)
     real, PUBLIC :: initial_ion_array(PARTICLE_MODEL_DIMENSION, INITIAL_ION_NUM)
 contains
-    function make_particle_array(particle_num)
-        implicit none
-        integer, intent(in) :: particle_num
-        real :: make_particle_array(PARTICLE_MODEL_DIMENSION, particle_num)
-        make_particle_array(:, :) = 0
-    end function
-
     subroutine init_particles()
         implicit none
         call init_neutrals()

@@ -1,11 +1,9 @@
 module initialize
-    use numerical_quantity
-    implicit none
-    
+    use particle
+    use lattice
 contains
-    function init_particles(particle_num)
-        integer, intent(in) :: particle_num
-        real :: init_particles
-        init_particles = 0
-    end function
+    subroutine init_all()
+        call init_particles()
+        call init_lattice()
+    end subroutine
 end module initialize

@@ -2,12 +2,15 @@ module lattice
     use numerical_quantity
     use array_utils
     implicit none
+    real :: neutral_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
+    real :: ion_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
+    real :: cex_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
 contains
-    function make_lattice_array()
-        implicit none
-        real :: make_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM)
-        make_lattice_array(:, :) = 0
-    end function
+    subroutine init_lattice()
+        neutral_lattice_array = 0
+        ion_lattice_array = 0
+        cex_lattice_array = 0
+    end subroutine
 
     function is_in_calc_area(position)
         real, intent(in) :: position(3)
