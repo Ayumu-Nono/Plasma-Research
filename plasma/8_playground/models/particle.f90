@@ -15,7 +15,7 @@ contains
     subroutine init_particles()
         implicit none
         call init_neutrals()
-        call init_neutrals()
+        call init_ions()
     end subroutine
 
     subroutine init_neutrals()
