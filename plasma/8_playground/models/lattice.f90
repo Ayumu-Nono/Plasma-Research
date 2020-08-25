@@ -2,14 +2,14 @@ module lattice
     use numerical_quantity
     use array_utils
     implicit none
-    real :: neutral_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
-    real :: ion_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
-    real :: cex_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
+    real :: initial_neutral_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
+    real :: initial_ion_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
+    real :: initial_cex_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
 contains
     subroutine init_lattice()
-        neutral_lattice_array = 0
-        ion_lattice_array = 0
-        cex_lattice_array = 0
+        initial_neutral_lattice_array = 0
+        initial_ion_lattice_array = 0
+        initial_cex_lattice_array = 0
     end subroutine
 
     function is_in_calc_area(position)
