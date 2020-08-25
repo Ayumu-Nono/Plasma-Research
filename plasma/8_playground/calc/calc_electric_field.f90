@@ -3,7 +3,7 @@ module calc_electric_field
     use numerical_quantity
     use physical_quantity
     implicit none
-    real :: electric_potential(LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
+    real :: electric_potential(LATTICE_NUM, LATTICE_NUM, LATTICE_NUM) = 0
     ! real :: electric_field(3, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
 contains
     subroutine calc_electric_potential_with_no_collision(ion_density)
@@ -41,7 +41,8 @@ contains
         surrounding_grid_array = calc_surrounding_grid(position=position)
         calc_electric_field_on_free_point = 0
         do grid = 1, 8
-            calc_electric_field_on_free_point(:) += calc_electric_field_on_grid(surrounding_grid_array(:, grid)) &
+            calc_electric_field_on_free_point = calc_electric_field_on_free_point &
+            + calc_electric_field_on_grid(surrounding_grid_array(:, grid)) &
             * volume_ratio_array(grid)
         end do
     end function
