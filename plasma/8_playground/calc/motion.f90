@@ -1,6 +1,7 @@
 module motion
     use physical_quantity
     use array_utils
+    use numerical_quantity
     implicit none
     
 contains
