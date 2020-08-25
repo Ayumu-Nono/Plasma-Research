@@ -11,8 +11,4 @@ module iterate
     real :: ion_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
     real :: cex_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
 contains
-    subroutine iterate()
-    implicit none
-    
-    end subroutine iterate
 end module iterate
