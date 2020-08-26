@@ -9,6 +9,7 @@ program evaluate
     implicit none
     integer :: time_step
     call init_all()
+    call receive_info_from_initializer()
     time_step = 1
-    call print_2D_array(initial_ion_array)
+    call each_step()
 end program evaluate
