@@ -27,7 +27,7 @@ contains
     subroutine init_ions()
         implicit none
         integer :: pk
-        initial_ion_array(1, :) = 0  ! 種類
+        initial_ion_array(1, :) = 1  ! 種類
         initial_ion_array(2, :) = ELEMENTARY_CHARGE  ! 電荷
         initial_ion_array(3, :) = XENON_MASS  ! 質量
         do pk = 1, size(initial_ion_array(1, :))
