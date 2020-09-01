@@ -19,6 +19,14 @@ contains
         call delete_particle_out_of_calc_area()
         call align_particle_array()
         call push_particle_info_to_grid()
+        call calc_field()
+        call print_3D_array(electric_potential)
+        ! call print_4D_array(neutral_lattice_array)
+    end subroutine
+
+    subroutine calc_field()
+        call calc_electric_potential_with_no_collision(ion_density=ion_lattice_array(1, :, :, :))
+        print *, electric_potential
     end subroutine
 
     subroutine receive_info_from_initializer()

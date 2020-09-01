@@ -12,5 +12,5 @@ program evaluate
     call receive_info_from_initializer()
     time_step = 1
     call each_step()
-    call print_2D_array(ion_array)
+    ! call print_2D_array(neutral_array)
 end program evaluate

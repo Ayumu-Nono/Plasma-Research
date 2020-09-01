@@ -11,6 +11,17 @@ contains
         end do
     end subroutine
 
+    subroutine print_3D_array(array)
+        implicit none
+        integer :: z
+        real, intent(in) :: array(:, :, :)
+        do z = 1, size(array(:, :, z))
+            print *, "z=", z
+            call print_2D_array(array=array(:, :, z))
+        end do 
+
+    end subroutine
+
     subroutine print_4D_array(array)
         implicit none
         integer :: y, z
