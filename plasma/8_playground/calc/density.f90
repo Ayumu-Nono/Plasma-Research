@@ -29,13 +29,13 @@ contains
             1, &
             int(density_array(1, grid)), &
             int(density_array(2, grid)), &
-            int(density_array(2, grid)) &
+            int(density_array(3, grid)) &
             ) = &
             calc_new_lattice_with_density_info( &
             1, &
             int(density_array(1, grid)), &
             int(density_array(2, grid)), &
-            int(density_array(2, grid)) &
+            int(density_array(3, grid)) &
             ) &
             + density_array(4, grid)
         end do
