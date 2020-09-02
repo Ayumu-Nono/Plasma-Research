@@ -20,13 +20,56 @@ contains
         call align_particle_array()
         call push_particle_info_to_grid()
         call calc_field()
-        call print_3D_array(electric_potential)
-        ! call print_4D_array(neutral_lattice_array)
+        call update_particles_model()
     end subroutine
+
+    subroutine update_particles_model()
+    implicit none
+    integer :: pk
+    real :: a_particle(PARTICLE_MODEL_DIMENSION)
+    real :: position(3)
+    do pk = 1, size(neutral_array(1, :))
+        a_particle = neutral_array(:, pk)
+        position = a_particle(4:6)
+        if (has_particle_info(a_particle=a_particle)) then
+            a_particle = calc_new_particle_model( &
+                particle=a_particle, &
+                magnetic_field=(/0.0, 0.0, 0.0/), &
+                electric_field=calc_electric_field_on_free_point(position) &
+            )
+            neutral_array(:, pk) = a_particle
+        end if
+    end do
+
+    do pk = 1, size(ion_array(1, :))
+        a_particle = ion_array(:, pk)
+        position = a_particle(4:6)
+        if (has_particle_info(a_particle=a_particle)) then
+            a_particle = calc_new_particle_model( &
+                particle=a_particle, &
+                magnetic_field=(/0.0, 0.0, 0.0/), &
+                electric_field=calc_electric_field_on_free_point(position) &
+            )
+            ion_array(:, pk) = a_particle
+        end if
+    end do
+
+    do pk = 1, size(cex_array(1, :))
+        a_particle = cex_array(:, pk)
+        position = a_particle(4:6)
+        if (has_particle_info(a_particle=a_particle)) then
+            a_particle = calc_new_particle_model( &
+                particle=a_particle, &
+                magnetic_field=(/0.0, 0.0, 0.0/), &
+                electric_field=calc_electric_field_on_free_point(position) &
+            )
+            cex_array(:, pk) = a_particle
+        end if
+    end do
+    end subroutine update_particles_model
 
     subroutine calc_field()
         call calc_electric_potential_with_no_collision(ion_density=ion_lattice_array(1, :, :, :))
-        print *, electric_potential
     end subroutine
 
     subroutine receive_info_from_initializer()
