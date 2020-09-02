@@ -90,14 +90,12 @@ contains
     subroutine push_particle_info_to_grid()
         implicit none
         integer :: pk
-        real :: a_particle(PARTICLE_MODEL_DIMENSION), position(3), density_array(4, 8)
+        real :: a_particle(PARTICLE_MODEL_DIMENSION)
         do pk = 1, size(neutral_array(1, :))
             a_particle = neutral_array(:, pk)
             if (has_particle_info(a_particle=a_particle)) then
-                position = a_particle(4:6)
-                density_array = calc_density_array(position)
                 neutral_lattice_array = calc_new_lattice_with_density_info( &
-                    density_array=density_array, &
+                    density_array=calc_density_array(a_particle), &
                     lattice_array=neutral_lattice_array &
                 )
                 neutral_lattice_array = calc_new_lattice_with_velocity_sum_info( &
@@ -110,10 +108,8 @@ contains
         do pk = 1, size(ion_array(1, :))
             a_particle = ion_array(:, pk)
             if (has_particle_info(a_particle=a_particle)) then
-                position = a_particle(4:6)
-                density_array = calc_density_array(position)
                 ion_lattice_array = calc_new_lattice_with_density_info( &
-                    density_array=density_array, &
+                    density_array=calc_density_array(a_particle), &
                     lattice_array=ion_lattice_array &
                 )
                 ion_lattice_array = calc_new_lattice_with_velocity_sum_info( &
@@ -126,10 +122,8 @@ contains
         do pk = 1, size(cex_array(1, :))
             a_particle = cex_array(:, pk)
             if (has_particle_info(a_particle=a_particle)) then
-                position = a_particle(4:6)
-                density_array = calc_density_array(position)
                 cex_lattice_array = calc_new_lattice_with_density_info( &
-                    density_array=density_array, &
+                    density_array=calc_density_array(a_particle), &
                     lattice_array=cex_lattice_array &
                 )    
             end if
