@@ -4,6 +4,7 @@ module iterate
     use lattice
     use calc_electric_field
     use density
+    use velocity_sum
     use motion
     use array_debug
     implicit none
@@ -21,6 +22,12 @@ contains
         call push_particle_info_to_grid()
         call calc_field()
         call update_particles_model()
+    end subroutine
+
+    subroutine generate_cex_ions()
+        implicit none
+        
+
     end subroutine
 
     subroutine update_particles_model()
@@ -93,6 +100,10 @@ contains
                     density_array=density_array, &
                     lattice_array=neutral_lattice_array &
                 )
+                neutral_lattice_array = calc_new_lattice_with_velocity_sum_info( &
+                    velocity_sum_array=calc_velocity_sum_array(a_particle), &
+                    lattice_array=neutral_lattice_array &
+                )
             end if
         end do
         
@@ -104,7 +115,11 @@ contains
                 ion_lattice_array = calc_new_lattice_with_density_info( &
                     density_array=density_array, &
                     lattice_array=ion_lattice_array &
-                )    
+                )
+                ion_lattice_array = calc_new_lattice_with_velocity_sum_info( &
+                    velocity_sum_array=calc_velocity_sum_array(a_particle), &
+                    lattice_array=ion_lattice_array &
+                )
             end if
         end do
 
