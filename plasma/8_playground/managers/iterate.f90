@@ -2,15 +2,17 @@ module iterate
     use numerical_quantity
     use particle
     use lattice
+    use random_utils
     use calc_electric_field
     use density
+    use charge_exchange
     use velocity_sum
     use motion
     use array_debug
     implicit none
     real, PUBLIC :: neutral_array(PARTICLE_MODEL_DIMENSION, ITERATE_NEUTRAL_NUM)
     real, PUBLIC :: ion_array(PARTICLE_MODEL_DIMENSION, ITERATE_ION_NUM)
-    real, PUBLIC :: cex_array(PARTICLE_MODEL_DIMENSION, ITERATE_ION_NUM)
+    real, PUBLIC :: cex_array(PARTICLE_MODEL_DIMENSION, ITERATE_CEX_NUM)
     real :: neutral_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
     real :: ion_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
     real :: cex_lattice_array(LATTICE_MODEL_DIMENSION, LATTICE_NUM, LATTICE_NUM, LATTICE_NUM)
@@ -22,12 +24,53 @@ contains
         call push_particle_info_to_grid()
         call calc_field()
         call update_particles_model()
+        call generate_cex_ions()
     end subroutine
 
     subroutine generate_cex_ions()
         implicit none
-        
+        real :: generate_rate_on_grid, generate_num
+        integer :: x, y, z
+        integer :: pk
+        do z = 1, LATTICE_NUM
+            do y = 1, LATTICE_NUM
+                do x = 1, LATTICE_NUM
+                    generate_rate_on_grid = calc_generate_rate_on_grid( &
+                        neutral_density=neutral_lattice_array(1, x, y, z), &
+                        ion_density=ion_lattice_array(1, x, y, z), &
+                        neutral_velocity=calc_average_velocity(neutral_lattice_array(:, x, y, z)), &
+                        ion_velocity=calc_average_velocity(ion_lattice_array(:, x, y, z)) &                   
+                    )
+                    generate_num = round_with_bias(generate_rate_on_grid)
+                    generate_num = int(generate_num)
+                    call generate_cex(position=real((/x, y, x/)), generate_num=generate_num)
+                end do
+            end do
+        end do
+    end subroutine
 
+    subroutine generate_cex(position, generate_num)
+        implicit none
+        real, intent(in) :: position(3)
+        real, intent(in) :: generate_num
+        integer :: pk
+        real :: counter
+        logical :: is_generate_success = .false.
+        counter = generate_num
+        do while (counter > 0)
+            counter = counter - 1
+            do pk = 1, ITERATE_CEX_NUM
+                if (.not. has_particle_info(cex_array(:, pk))) then
+                    cex_array(:, pk) = return_initial_cex_particle(position=position)
+                    is_generate_success = .true.
+                end if
+            end do
+            if (.not. is_generate_success) then
+                print *, "ERROR: in iterate module"
+                print *, "shortage of cex_array length."
+                STOP
+            end if
+        end do
     end subroutine
 
     subroutine update_particles_model()

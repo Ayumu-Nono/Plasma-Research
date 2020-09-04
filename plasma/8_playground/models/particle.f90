@@ -39,6 +39,17 @@ contains
         end do
     end subroutine
 
+    function return_initial_cex_particle(position)
+        implicit none
+        real, intent(in) :: position(3)
+        real :: return_initial_cex_particle(PARTICLE_MODEL_DIMENSION)
+        return_initial_cex_particle(1) = 3 ! 種類
+        return_initial_cex_particle(2) = ELEMENTARY_CHARGE ! 電荷
+        return_initial_cex_particle(3) = XENON_MASS ! 質量
+        return_initial_cex_particle(4:6) = position
+        call random_number(return_initial_cex_particle(7:9))
+    end function
+
     function has_particle_info(a_particle)
         implicit none
         real, intent(in) :: a_particle(PARTICLE_MODEL_DIMENSION)
