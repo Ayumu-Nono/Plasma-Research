@@ -6,11 +6,12 @@ program evaluate
     use lattice
     use initialize
     use iterate
+    use output
     implicit none
     integer :: time_step
     call init_all()
     call receive_info_from_initializer()
     time_step = 1
     call each_step()
-    ! call print_2D_array(neutral_array)
+    call save_particle_array_as_csv()
 end program evaluate
