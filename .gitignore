@@ -3,10 +3,13 @@
 MTG/
 __pycache__/
 .DS_Store
-data/
 playground.py
 
 # fortran
 playground.f90
 *.mod
 *.out
+
+# data
+outdata/
+data/

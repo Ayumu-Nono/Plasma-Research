@@ -20,7 +20,7 @@ contains
         do pk = 1, size(initial_neutral_array(1, :))
             ! TODO 乱数発生をコントロール
             call random_number(initial_neutral_array(4:6, pk))
-            initial_neutral_array(4:6, pk) = initial_neutral_array(4:6, pk) * 10
+            initial_neutral_array(4:6, pk) = initial_neutral_array(4:6, pk) * 100
             call random_number(initial_neutral_array(7:9, pk))
         end do
     end subroutine
