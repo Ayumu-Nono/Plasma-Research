@@ -25,13 +25,21 @@ contains
         call calc_field()
         call update_particles_model()
         call generate_cex_ions()
+        call add_new_particles()
     end subroutine
+
+    subroutine add_new_particles()
+        implicit none
+        
+    end subroutine
+    
 
     subroutine generate_cex_ions()
         implicit none
         real :: generate_rate_on_grid, generate_num
         integer :: x, y, z
         integer :: pk
+        
         do z = 1, LATTICE_NUM
             do y = 1, LATTICE_NUM
                 do x = 1, LATTICE_NUM
@@ -47,6 +55,7 @@ contains
                 end do
             end do
         end do
+
     end subroutine
 
     subroutine generate_cex(position, generate_num)
