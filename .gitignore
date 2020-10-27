@@ -1,3 +1,20 @@
+# python
+.vscode/
+MTG/
+__pycache__/
+.DS_Store
+playground.py
+
+# fortran
+playground.f90
+*.mod
+*.out
+
+# data
+outdata/
+data/
+
+# others
 myvenv/
 .mypy_cache
 tex/
