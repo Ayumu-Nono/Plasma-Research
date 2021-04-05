@@ -13,3 +13,8 @@ playground.f90
 # data
 outdata/
 data/
+
+# others
+myvenv/
+.mypy_cache
+tex/
